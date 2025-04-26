@@ -8,6 +8,7 @@ export interface Question {
   options?: string[];
   variables?: string[];
   variable?: string;
+  internal_note?: string;
   condition?: {
     depends_on: string;
     answer?: string;
@@ -23,7 +24,7 @@ export interface QuizData {
     conditional_logic: {
       question: string;
       depends_on: string;
-      required_answer?: string;
+      answer?: string;
       logic?: string;
     }[];
   };

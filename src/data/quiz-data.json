@@ -1,11 +1,11 @@
+
 {
   "questions": [
     {
       "id": "q1",
-      "question_text": "Please enter your business name and the city where it's located. *(e.g., “Happy Pets Grooming, Denver”)*",
+      "question_text": "Please enter your business name and the city where it's located. *(e.g., "Happy Pets Grooming, Denver")*",
       "type": "combined_text",
-      "variables": ["#business-name", "#city"],
-      "internal_note": "Split input into two variables separated by a comma"
+      "variables": ["#business-name", "#city"]
     },
     {
       "id": "q2",
@@ -32,11 +32,11 @@
       "type": "single_choice",
       "options": [
         "✅ I want to attract more customers or leads",
-        "🟢 I’m not seeing good results from my current online efforts",
+        "🟢 I'm not seeing good results from my current online efforts",
         "🟡 I want to build a stronger brand presence online",
         "🟤 I have no time for online advertising due to other responsibilities",
         "❗ Starting online advertising feels too complicated",
-        "? I’m unsure how to get started with online marketing"
+        "? I'm unsure how to get started with online marketing"
       ],
       "variable": "#main-challenge"
     },
@@ -80,7 +80,7 @@
         "Creating engaging content or visuals",
         "Staying consistent with posting",
         "Interacting with followers (comments, DMs)",
-        "I’m not sure where to start"
+        "I'm not sure where to start"
       ],
       "variable": "#smm-obstacle"
     },
@@ -92,7 +92,7 @@
         "I manage everything myself",
         "I have an employee or freelancer who helps",
         "I outsource it to an agency or professional",
-        "I don’t currently manage or run any advertising"
+        "I don't currently manage or run any advertising"
       ],
       "variable": "#smm-management"
     },
@@ -144,7 +144,7 @@
       "options": [
         "Yes, regularly",
         "Sometimes",
-        "No, we don’t share visuals much",
+        "No, we don't share visuals much",
         "Not sure where to start"
       ],
       "variable": "#category-videos",
@@ -168,13 +168,13 @@
         "Creating content (posts, photos, videos)",
         "Responding to customer inquiries and reviews",
         "Planning or running ads",
-        "I’m not active enough for it to be time-consuming"
+        "I'm not active enough for it to be time-consuming"
       ],
       "variable": "#time-social-issues"
     },
     {
       "id": "q17",
-      "question_text": "If time or budget weren’t an issue, which area would you prioritize first?",
+      "question_text": "If time or budget weren't an issue, which area would you prioritize first?",
       "type": "multiple_choice",
       "options": [
         "Posting more regularly on social media",
@@ -206,8 +206,8 @@
       "options": [
         "We use automated replies or chatbots",
         "We respond the next business day",
-        "We don’t have a system",
-        "I’d like help setting up an after-hours approach"
+        "We don't have a system",
+        "I'd like help setting up an after-hours approach"
       ],
       "variable": "#customers-oowh"
     },
@@ -219,7 +219,7 @@
         "Respond professionally in public",
         "Contact the reviewer privately",
         "Ignore them",
-        "I haven’t had negative reviews yet",
+        "I haven't had negative reviews yet",
         "Not sure"
       ],
       "variable": "#reputation-negative"
@@ -242,14 +242,14 @@
       "id": "q24",
       "question_text": "Are you satisfied with the number of leads or inquiries you receive from your online channels?",
       "type": "single_choice",
-      "options": ["Very satisfied", "Somewhat satisfied", "Not satisfied", "Unsure / I don’t track this"],
+      "options": ["Very satisfied", "Somewhat satisfied", "Not satisfied", "Unsure / I don't track this"],
       "variable": "#leads-quality"
     },
     {
       "id": "q25",
       "question_text": "Do you collect any customer data (e.g., emails, phone numbers) for follow-up marketing?",
       "type": "single_choice",
-      "options": ["Yes, I maintain a list", "Sometimes, but not organized", "No, I don’t collect any data", "Not sure how to start"],
+      "options": ["Yes, I maintain a list", "Sometimes, but not organized", "No, I don't collect any data", "Not sure how to start"],
       "variable": "#emails-collect"
     },
     {
@@ -266,7 +266,7 @@
     },
     {
       "id": "q27",
-      "question_text": "Any other comments or specific areas you’d like to improve?",
+      "question_text": "Any other comments or specific areas you'd like to improve?",
       "type": "open_text",
       "variable": "#other-comments"
     },
@@ -289,7 +289,6 @@
       {
         "question": "q7",
         "depends_on": "q6",
-        "required_answer": "None",
         "logic": "hide_if_selected"
       }
     ]

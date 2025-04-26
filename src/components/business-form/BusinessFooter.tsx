@@ -1,3 +1,4 @@
+
 import React from "react";
 
 interface BusinessFooterProps {
@@ -24,15 +25,13 @@ export const BusinessFooter: React.FC<BusinessFooterProps> = ({
       </button>
 
       <div className="flex w-full max-w-[400px] flex-col items-stretch text-xs text-[#1e2b86] justify-center mt-6">
-        <div className="self-center">Company address</div>
+        <div className="self-center">Thitny.com</div>
         <div className="flex w-full items-center gap-1 text-center leading-[1.4] justify-center mt-2">
           <div className="text-[rgba(70,90,234,1)] self-stretch my-auto">
             <span className="text-[#1e2b86]">Terms & Conditions</span>
           </div>
           <div className="bg-[rgba(115,103,240,0.3)] self-stretch flex w-2 shrink-0 h-2 my-auto rounded-[200px]" />
           <div className="self-stretch my-auto">Privacy Policy</div>
-          <div className="bg-[rgba(115,103,240,0.3)] self-stretch flex w-2 shrink-0 h-2 my-auto rounded-[200px]" />
-          <div className="self-stretch my-auto">Subscription Policy</div>
         </div>
       </div>
     </footer>

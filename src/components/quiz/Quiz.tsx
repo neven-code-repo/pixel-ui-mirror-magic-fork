@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { QuizData } from '@/types/quiz';
 import { QuizQuestion } from './QuizQuestion';
@@ -18,9 +17,8 @@ export const Quiz: React.FC<QuizProps> = ({ data }) => {
   const handleContinue = () => {
     if (currentStep < data.questions.length - 1) {
       setCurrentStep(currentStep + 1);
-    } else {
-      console.log('Quiz completed!');
-      // Handle quiz completion
+    } else if (answers['q28']) { // Check if email/phone is entered
+      window.location.href = 'https://app.thitny.com';
     }
   };
 
@@ -63,21 +61,23 @@ export const Quiz: React.FC<QuizProps> = ({ data }) => {
   const progress = Math.round(((currentStep + 1) / data.questions.length) * 100);
 
   return (
-    <div className="bg-[rgba(244,247,255,1)] max-w-[480px] w-full overflow-hidden mx-auto">
+    <div className="bg-[rgba(244,247,255,1)] max-w-[480px] w-full overflow-hidden mx-auto flex flex-col min-h-screen">
       <BusinessHeader />
       
-      <main className="bg-[rgba(244,247,255,1)] flex min-h-[611px] flex-col items-stretch justify-center pl-6 pr-[23px] py-12">
-        <BusinessProgress progress={progress} title={data.metadata.description} />
-        
-        <div className="w-full flex-1 mt-12">
-          <QuizQuestion question={currentQuestion} />
+      <main className="bg-[rgba(244,247,255,1)] flex flex-col flex-grow px-6 py-8 justify-between">
+        <div>
+          <BusinessProgress progress={progress} />
+          
+          <div className="w-full mt-8">
+            <QuizQuestion question={currentQuestion} />
+          </div>
         </div>
-      </main>
 
-      <BusinessFooter 
-        onContinue={handleContinue}
-        isValid={isValidAnswer(currentQuestion)}
-      />
+        <BusinessFooter 
+          onContinue={handleContinue}
+          isValid={isValidAnswer(currentQuestion)}
+        />
+      </main>
     </div>
   );
 };

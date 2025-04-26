@@ -1,12 +1,10 @@
-
 {
   "questions": [
     {
       "id": "q1",
-      "question_text": "Please enter your business name and the city where it's located. *(e.g., \"Happy Pets Grooming, Denver\")*",
+      "question_text": "Please enter your business name and the city where it's located.",
       "type": "combined_text",
-      "variables": ["#business-name", "#city"],
-      "internal_note": "Split input into two variables separated by a comma"
+      "variables": ["#business-name", "#city"]
     },
     {
       "id": "q2",
@@ -280,7 +278,7 @@
   ],
   "metadata": {
     "version": "1.0",
-    "description": "B2B Quiz for Small Business Online Presence Analysis",
+    "description": "",
     "conditional_logic": [
       {
         "question": "q12-q14",

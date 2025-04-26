@@ -1,0 +1,297 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question_text": "Please enter your business name and the city where it's located. *(e.g., “Happy Pets Grooming, Denver”)*",
+      "type": "combined_text",
+      "variables": ["#business-name", "#city"],
+      "internal_note": "Split input into two variables separated by a comma"
+    },
+    {
+      "id": "q2",
+      "question_text": "Which of the following best describes your business type or category?",
+      "type": "single_choice",
+      "options": [
+        "Restaurant/Café / Food Business",
+        "Retail Store / Boutique",
+        "Professional Services (Consultant, Lawyer, Accountant, etc.)",
+        "Brick-and-Mortar Shop (Local customers)",
+        "eCommerce (Selling products online)",
+        "Health/Wellness / Fitness",
+        "Home Services (Cleaning, Contracting, Maintenance, etc.)",
+        "Creative/Freelance (Photography, Design, Art)",
+        "Events / Entertainment",
+        "Startup or Tech-based",
+        "Other (please specify)"
+      ],
+      "variable": "#category"
+    },
+    {
+      "id": "q3",
+      "question_text": "What is the main challenge or reason you want to improve your online presence?",
+      "type": "single_choice",
+      "options": [
+        "✅ I want to attract more customers or leads",
+        "🟢 I’m not seeing good results from my current online efforts",
+        "🟡 I want to build a stronger brand presence online",
+        "🟤 I have no time for online advertising due to other responsibilities",
+        "❗ Starting online advertising feels too complicated",
+        "? I’m unsure how to get started with online marketing"
+      ],
+      "variable": "#main-challenge"
+    },
+    {
+      "id": "q4",
+      "question_text": "Are you listed in local directories (e.g., Google Business Profile, Yelp)?",
+      "type": "single_choice",
+      "options": ["✅ Yes", "✅ No", "💷 Not sure"],
+      "variable": "#local-directories"
+    },
+    {
+      "id": "q5",
+      "question_text": "Do you currently have a business website?",
+      "type": "single_choice",
+      "options": ["Yes", "No", "Planning to create one"],
+      "variable": "#website"
+    },
+    {
+      "id": "q6",
+      "question_text": "Which social media platforms do you use for your business (if any)?",
+      "type": "multiple_choice",
+      "options": ["Facebook", "Instagram", "LinkedIn", "TikTok", "Twitter/X", "None"],
+      "variable": "#social-networks"
+    },
+    {
+      "id": "q7",
+      "question_text": "How often do you post or update your social media channels?",
+      "type": "single_choice",
+      "options": ["Daily", "A few times a week", "Once a week", "Rarely/Not regularly"],
+      "variable": "#smm-schedule",
+      "condition": {
+        "depends_on": "q6",
+        "logic": "none_of:None"
+      }
+    },
+    {
+      "id": "q8",
+      "question_text": "When it comes to social media, what is your biggest obstacle?",
+      "type": "single_choice",
+      "options": [
+        "Creating engaging content or visuals",
+        "Staying consistent with posting",
+        "Interacting with followers (comments, DMs)",
+        "I’m not sure where to start"
+      ],
+      "variable": "#smm-obstacle"
+    },
+    {
+      "id": "q9",
+      "question_text": "Do you handle your social media and online advertising by yourself, or do you pay someone to do it?",
+      "type": "single_choice",
+      "options": [
+        "I manage everything myself",
+        "I have an employee or freelancer who helps",
+        "I outsource it to an agency or professional",
+        "I don’t currently manage or run any advertising"
+      ],
+      "variable": "#smm-management"
+    },
+    {
+      "id": "q10",
+      "question_text": "Have you ever used online advertising (e.g., Facebook Ads, Google Ads) to attract more customers?",
+      "type": "single_choice",
+      "options": ["Yes, currently", "Yes, in the past but not now", "No, never", "Unsure"],
+      "variable": "#paid-advertising"
+    },
+    {
+      "id": "q11",
+      "question_text": "Did you use influencer or content creator services for your business?",
+      "type": "single_choice",
+      "options": ["Yes", "No", "Not sure"],
+      "variable": "#influencer"
+    },
+    {
+      "id": "q12",
+      "question_text": "Do you offer online ordering or partner with any food delivery services (e.g., Uber Eats, DoorDash)?",
+      "type": "single_choice",
+      "options": [
+        "Yes, we have our own online ordering",
+        "Yes, we partner with third-party apps",
+        "Not currently",
+        "Thinking about it"
+      ],
+      "variable": "#category-food-delivery",
+      "condition": {
+        "depends_on": "q2",
+        "answer": "Restaurant/Café / Food Business"
+      }
+    },
+    {
+      "id": "q13",
+      "question_text": "How often do you update your online menu or announce new specials/deals?",
+      "type": "single_choice",
+      "options": ["Weekly or more often", "Monthly", "Rarely", "? Not sure how to keep it updated"],
+      "variable": "#category-specials",
+      "condition": {
+        "depends_on": "q2",
+        "answer": "Restaurant/Café / Food Business"
+      }
+    },
+    {
+      "id": "q14",
+      "question_text": "Are you using photos or videos to showcase your meals on social media or delivery platforms?",
+      "type": "single_choice",
+      "options": [
+        "Yes, regularly",
+        "Sometimes",
+        "No, we don’t share visuals much",
+        "Not sure where to start"
+      ],
+      "variable": "#category-videos",
+      "condition": {
+        "depends_on": "q2",
+        "answer": "Restaurant/Café / Food Business"
+      }
+    },
+    {
+      "id": "q15",
+      "question_text": "How many hours per week do you spend managing your online presence?",
+      "type": "single_choice",
+      "options": ["Under 1 hour", "1–3 hours", "3–5 hours", "Over 5 hours"],
+      "variable": "#time-social"
+    },
+    {
+      "id": "q16",
+      "question_text": "Which part of your online presence do you find most time-consuming or difficult to manage?",
+      "type": "single_choice",
+      "options": [
+        "Creating content (posts, photos, videos)",
+        "Responding to customer inquiries and reviews",
+        "Planning or running ads",
+        "I’m not active enough for it to be time-consuming"
+      ],
+      "variable": "#time-social-issues"
+    },
+    {
+      "id": "q17",
+      "question_text": "If time or budget weren’t an issue, which area would you prioritize first?",
+      "type": "multiple_choice",
+      "options": [
+        "Posting more regularly on social media",
+        "Improving communication and response time",
+        "Handling online reviews and reputation",
+        "Running ads for more leads",
+        "Other (please specify)"
+      ],
+      "variable": "#time-social-priority"
+    },
+    {
+      "id": "q18",
+      "question_text": "Do you monitor online reviews on platforms like Google, Yelp, or Facebook?",
+      "type": "single_choice",
+      "options": ["Yes", "No", "Not sure"],
+      "variable": "#reputation-monitor"
+    },
+    {
+      "id": "q19",
+      "question_text": "How often do you respond to online reviews (positive or negative)?",
+      "type": "single_choice",
+      "options": ["Always (promptly)", "Sometimes", "Rarely", "Never"],
+      "variable": "#reputation-often"
+    },
+    {
+      "id": "q20",
+      "question_text": "How do you handle potential customers who contact you outside of regular business hours?",
+      "type": "single_choice",
+      "options": [
+        "We use automated replies or chatbots",
+        "We respond the next business day",
+        "We don’t have a system",
+        "I’d like help setting up an after-hours approach"
+      ],
+      "variable": "#customers-oowh"
+    },
+    {
+      "id": "q21",
+      "question_text": "How do you typically handle negative reviews?",
+      "type": "single_choice",
+      "options": [
+        "Respond professionally in public",
+        "Contact the reviewer privately",
+        "Ignore them",
+        "I haven’t had negative reviews yet",
+        "Not sure"
+      ],
+      "variable": "#reputation-negative"
+    },
+    {
+      "id": "q22",
+      "question_text": "Do you ask customers to leave reviews or share their impressions of your business?",
+      "type": "single_choice",
+      "options": ["Yes, regularly", "Occasionally", "No, never", "Not sure how to start"],
+      "variable": "#reputation-initiative"
+    },
+    {
+      "id": "q23",
+      "question_text": "Do you use any word-of-mouth (WOM) incentives?",
+      "type": "single_choice",
+      "options": ["Yes", "No", "Thinking about it", "Not sure how to implement"],
+      "variable": "#reputation-wom"
+    },
+    {
+      "id": "q24",
+      "question_text": "Are you satisfied with the number of leads or inquiries you receive from your online channels?",
+      "type": "single_choice",
+      "options": ["Very satisfied", "Somewhat satisfied", "Not satisfied", "Unsure / I don’t track this"],
+      "variable": "#leads-quality"
+    },
+    {
+      "id": "q25",
+      "question_text": "Do you collect any customer data (e.g., emails, phone numbers) for follow-up marketing?",
+      "type": "single_choice",
+      "options": ["Yes, I maintain a list", "Sometimes, but not organized", "No, I don’t collect any data", "Not sure how to start"],
+      "variable": "#emails-collect"
+    },
+    {
+      "id": "q26",
+      "question_text": "Does your business adapt its online strategy during peak seasons or holidays?",
+      "type": "single_choice",
+      "options": [
+        "Yes, we plan special promotions",
+        "Sometimes, but not consistently",
+        "No, we treat all seasons the same",
+        "Not sure how to create seasonal campaigns"
+      ],
+      "variable": "#special-events"
+    },
+    {
+      "id": "q27",
+      "question_text": "Any other comments or specific areas you’d like to improve?",
+      "type": "open_text",
+      "variable": "#other-comments"
+    },
+    {
+      "id": "q28",
+      "question_text": "Where should we send your personalized report? (Enter email/phone)",
+      "type": "contact_input",
+      "variable": "#contact-info"
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "description": "B2B Quiz for Small Business Online Presence Analysis",
+    "conditional_logic": [
+      {
+        "question": "q12-q14",
+        "depends_on": "q2",
+        "required_answer": "Restaurant/Café / Food Business"
+      },
+      {
+        "question": "q7",
+        "depends_on": "q6",
+        "required_answer": "None",
+        "logic": "hide_if_selected"
+      }
+    ]
+  }
+}

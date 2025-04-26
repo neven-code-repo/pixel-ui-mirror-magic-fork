@@ -1,10 +1,15 @@
+
 import React from "react";
-import { BusinessForm } from "@/components/business-form/BusinessForm";
+import { Quiz } from "@/components/quiz/Quiz";
+import { QuizProvider } from "@/context/QuizContext";
+import quizData from "@/data/quiz-data.json";
 
 const Index: React.FC = () => {
   return (
     <div className="min-h-screen bg-[rgba(244,247,255,1)] flex items-center justify-center">
-      <BusinessForm />
+      <QuizProvider>
+        <Quiz data={quizData} />
+      </QuizProvider>
     </div>
   );
 };

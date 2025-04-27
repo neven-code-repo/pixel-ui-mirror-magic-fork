@@ -1,3 +1,4 @@
+
 export type QuestionType = 'combined_text' | 'single_choice' | 'multiple_choice' | 'open_text' | 'contact_input' | 'email_input';
 
 export interface Question {

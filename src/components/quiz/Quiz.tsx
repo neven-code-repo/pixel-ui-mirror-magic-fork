@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { QuizData } from '@/types/quiz';
 import { QuizQuestion } from './QuizQuestion';
@@ -14,7 +15,7 @@ interface QuizProps {
 }
 
 export const Quiz: React.FC<QuizProps> = ({ data }) => {
-  const { currentStep, setCurrentStep, answers, isValidAnswer } = useQuiz();
+  const { currentStep, setCurrentStep, answers, isValidAnswer, setAnswer } = useQuiz();
   const [showCompletion, setShowCompletion] = useState(false);
   
   const currentQuestion = data.questions[currentStep];
@@ -56,20 +57,6 @@ export const Quiz: React.FC<QuizProps> = ({ data }) => {
     }
     
     return dependentAnswer === answer;
-  };
-
-  const renderQuestionInput = () => {
-    switch (question.type) {
-      case 'email_input':
-        return (
-          <EmailInput
-            value={currentAnswer as string}
-            onChange={(value) => setAnswer(question.id, value)}
-          />
-        );
-      default:
-        return null;
-    }
   };
 
   const shouldShowCarousel = currentStep === 0;

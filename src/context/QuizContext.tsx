@@ -46,11 +46,11 @@ export const QuizProvider: React.FC<{ children: React.ReactNode }> = ({ children
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          service_id: 'YOUR_SERVICE_ID',
-          template_id: 'YOUR_TEMPLATE_ID',
-          user_id: 'YOUR_USER_ID',
+          service_id: 'service_qkkexhr',
+          template_id: 'template_8po8lyj',
+          user_id: 'user_k5C9TjhZ8KJ9Y5Q2X',
           template_params: {
-            to_email: 'thitny.app@gmail.com',
+            to_email: 'bojan.milekic@gmail.com',
             subject: 'New business finished quiz',
             user_email: email,
             quiz_data: JSON.stringify(answers),

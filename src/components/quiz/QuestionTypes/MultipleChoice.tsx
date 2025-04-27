@@ -62,6 +62,7 @@ export const MultipleChoice: React.FC<MultipleChoiceProps> = ({ options, value, 
           </div>
         );
       })}
+      <p className="text-sm text-gray-500 italic mt-2">You can select multiple answers for this question</p>
     </div>
   );
 };

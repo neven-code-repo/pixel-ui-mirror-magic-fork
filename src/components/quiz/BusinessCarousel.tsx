@@ -37,9 +37,9 @@ export const BusinessCarousel: React.FC = () => {
                 <span className="text-[#1e2b86]/70"> from {business.city} just completed the quiz</span>
               </div>
             </CarouselItem>
-          </CarouselContent>
-        </Carousel>
-      </div>
+          ))}
+        </CarouselContent>
+      </Carousel>
     </div>
   );
 };

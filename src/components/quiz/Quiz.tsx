@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { QuizData } from '@/types/quiz';
 import { QuizQuestion } from './QuizQuestion';
@@ -9,6 +8,7 @@ import { BusinessProgress } from '../business-form/BusinessProgress';
 import { CompletionScreen } from './CompletionScreen';
 import { BusinessCarousel } from './BusinessCarousel';
 import { EmailInput } from './QuestionTypes/EmailInput';
+import { AnalysisScreen } from './AnalysisScreen';
 
 interface QuizProps {
   data: QuizData;
@@ -16,6 +16,7 @@ interface QuizProps {
 
 export const Quiz: React.FC<QuizProps> = ({ data }) => {
   const { currentStep, setCurrentStep, answers, isValidAnswer, setAnswer } = useQuiz();
+  const [showAnalysis, setShowAnalysis] = useState(false);
   const [showCompletion, setShowCompletion] = useState(false);
   
   const currentQuestion = data.questions[currentStep];
@@ -23,10 +24,14 @@ export const Quiz: React.FC<QuizProps> = ({ data }) => {
   const handleContinue = () => {
     if (currentStep < data.questions.length - 1) {
       setCurrentStep(currentStep + 1);
-    } else if (answers['q28']) { // Check if email/phone is entered
-      // Show completion screen instead of immediate redirect
-      setShowCompletion(true);
+    } else if (answers['q28']) {
+      setShowAnalysis(true);
     }
+  };
+
+  const handleAnalysisComplete = () => {
+    setShowAnalysis(false);
+    setShowCompletion(true);
   };
 
   const handleCompletionContinue = () => {
@@ -61,6 +66,24 @@ export const Quiz: React.FC<QuizProps> = ({ data }) => {
 
   const shouldShowCarousel = currentStep === 0;
 
+  if (showAnalysis) {
+    return (
+      <div className="bg-[rgba(244,247,255,1)] max-w-[480px] w-full overflow-hidden mx-auto flex flex-col min-h-screen">
+        <BusinessHeader />
+        <AnalysisScreen onComplete={handleAnalysisComplete} />
+      </div>
+    );
+  }
+
+  if (showCompletion) {
+    return (
+      <div className="bg-[rgba(244,247,255,1)] max-w-[480px] w-full overflow-hidden mx-auto flex flex-col min-h-screen">
+        <BusinessHeader />
+        <CompletionScreen onContinue={handleCompletionContinue} />
+      </div>
+    );
+  }
+
   if (!currentQuestion || !showQuestion(currentQuestion)) {
     if (currentStep < data.questions.length - 1) {
       setCurrentStep(currentStep + 1);
@@ -72,15 +95,6 @@ export const Quiz: React.FC<QuizProps> = ({ data }) => {
   }
 
   const progress = Math.round(((currentStep + 1) / data.questions.length) * 100);
-
-  if (showCompletion) {
-    return (
-      <div className="bg-[rgba(244,247,255,1)] max-w-[480px] w-full overflow-hidden mx-auto flex flex-col min-h-screen">
-        <BusinessHeader />
-        <CompletionScreen onContinue={handleCompletionContinue} />
-      </div>
-    );
-  }
 
   return (
     <div className="bg-[rgba(244,247,255,1)] max-w-[480px] w-full overflow-hidden mx-auto flex flex-col min-h-screen">

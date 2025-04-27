@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { QuizData } from '@/types/quiz';
 import { QuizQuestion } from './QuizQuestion';
@@ -7,6 +6,8 @@ import { BusinessHeader } from '../business-form/BusinessHeader';
 import { BusinessFooter } from '../business-form/BusinessFooter';
 import { BusinessProgress } from '../business-form/BusinessProgress';
 import { CompletionScreen } from './CompletionScreen';
+import { BusinessCarousel } from './BusinessCarousel';
+import { EmailInput } from './QuestionTypes/EmailInput';
 
 interface QuizProps {
   data: QuizData;
@@ -57,6 +58,22 @@ export const Quiz: React.FC<QuizProps> = ({ data }) => {
     return dependentAnswer === answer;
   };
 
+  const renderQuestionInput = () => {
+    switch (question.type) {
+      case 'email_input':
+        return (
+          <EmailInput
+            value={currentAnswer as string}
+            onChange={(value) => setAnswer(question.id, value)}
+          />
+        );
+      default:
+        return null;
+    }
+  };
+
+  const shouldShowCarousel = currentStep === 0;
+
   if (!currentQuestion || !showQuestion(currentQuestion)) {
     if (currentStep < data.questions.length - 1) {
       setCurrentStep(currentStep + 1);
@@ -88,6 +105,7 @@ export const Quiz: React.FC<QuizProps> = ({ data }) => {
           
           <div className="w-full mt-8">
             <QuizQuestion question={currentQuestion} />
+            {shouldShowCarousel && <BusinessCarousel />}
           </div>
         </div>
 

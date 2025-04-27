@@ -17,6 +17,9 @@ export const OpenText: React.FC<OpenTextProps> = ({ value, onChange }) => {
         placeholder="Type your answer here..."
         className="min-h-[120px] text-[#1e2b86]"
       />
+      <p className="text-sm text-[#1e2b86] mt-2 italic">
+        If you don't have any other comments just click continue
+      </p>
     </div>
   );
 };

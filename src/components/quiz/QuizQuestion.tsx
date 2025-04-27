@@ -61,7 +61,7 @@ export const QuizQuestion: React.FC<QuizQuestionProps> = ({ question }) => {
             onChange={(value) => setAnswer(question.id, value)}
           />
         );
-      case 'email':
+      case 'email_input':
         return (
           <EmailInput
             value={currentAnswer as string}

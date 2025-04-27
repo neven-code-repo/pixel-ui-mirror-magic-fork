@@ -31,7 +31,7 @@ export const QuizTooltip: React.FC<QuizTooltipProps> = ({ type, step }) => {
       return {
         icon: '🚀',
         title: 'Almost There!',
-        message: 'Your determination sets you apart from other business owners. We're excited to help you succeed!'
+        message: "Your determination sets you apart from other business owners. We're excited to help you succeed!"
       };
     }
     

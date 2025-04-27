@@ -1,10 +1,12 @@
-import React from 'react';
+
+import React, { useState } from 'react';
 import { QuizData } from '@/types/quiz';
 import { QuizQuestion } from './QuizQuestion';
 import { useQuiz } from '@/context/QuizContext';
 import { BusinessHeader } from '../business-form/BusinessHeader';
 import { BusinessFooter } from '../business-form/BusinessFooter';
 import { BusinessProgress } from '../business-form/BusinessProgress';
+import { CompletionScreen } from './CompletionScreen';
 
 interface QuizProps {
   data: QuizData;
@@ -12,14 +14,21 @@ interface QuizProps {
 
 export const Quiz: React.FC<QuizProps> = ({ data }) => {
   const { currentStep, setCurrentStep, answers, isValidAnswer } = useQuiz();
+  const [showCompletion, setShowCompletion] = useState(false);
+  
   const currentQuestion = data.questions[currentStep];
 
   const handleContinue = () => {
     if (currentStep < data.questions.length - 1) {
       setCurrentStep(currentStep + 1);
     } else if (answers['q28']) { // Check if email/phone is entered
-      window.location.href = 'https://app.thitny.com';
+      // Show completion screen instead of immediate redirect
+      setShowCompletion(true);
     }
+  };
+
+  const handleCompletionContinue = () => {
+    window.location.href = 'https://app.thitny.com';
   };
 
   const showQuestion = (question: typeof currentQuestion) => {
@@ -59,6 +68,15 @@ export const Quiz: React.FC<QuizProps> = ({ data }) => {
   }
 
   const progress = Math.round(((currentStep + 1) / data.questions.length) * 100);
+
+  if (showCompletion) {
+    return (
+      <div className="bg-[rgba(244,247,255,1)] max-w-[480px] w-full overflow-hidden mx-auto flex flex-col min-h-screen">
+        <BusinessHeader />
+        <CompletionScreen onContinue={handleCompletionContinue} />
+      </div>
+    );
+  }
 
   return (
     <div className="bg-[rgba(244,247,255,1)] max-w-[480px] w-full overflow-hidden mx-auto flex flex-col min-h-screen">

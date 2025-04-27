@@ -3,12 +3,10 @@ import React from "react";
 
 interface BusinessProgressProps {
   progress?: number;
-  title?: string;
 }
 
 export const BusinessProgress: React.FC<BusinessProgressProps> = ({ 
-  progress = 0, 
-  title = "Basic Business Information & Motivation" 
+  progress = 0
 }) => {
   return (
     <div className="self-center flex max-w-full w-[342px] flex-col items-stretch text-base text-[rgba(70,90,234,1)] font-normal text-center justify-center">
@@ -17,18 +15,6 @@ export const BusinessProgress: React.FC<BusinessProgressProps> = ({
           className="h-full bg-[#465AEA]"
           style={{ width: `${progress}%` }}
         ></div>
-      </div>
-      <div className="mt-4">
-        <span
-          style={{
-            fontFamily: "Inter, -apple-system, Roboto, Helvetica, sans-serif",
-            fontWeight: 500,
-            lineHeight: "19px",
-            color: "rgba(70,90,234,1)",
-          }}
-        >
-          {title}
-        </span>
       </div>
     </div>
   );

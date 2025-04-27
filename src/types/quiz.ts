@@ -33,3 +33,7 @@ export interface QuizData {
 export type QuizAnswers = {
   [key: string]: string | string[];
 };
+
+export interface CompletionScreenProps {
+  onContinue: () => void;
+}

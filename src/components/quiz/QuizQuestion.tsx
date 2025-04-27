@@ -7,14 +7,19 @@ import { MultipleChoice } from './QuestionTypes/MultipleChoice';
 import { OpenText } from './QuestionTypes/OpenText';
 import { ContactInput } from './QuestionTypes/ContactInput';
 import { useQuiz } from '@/context/QuizContext';
+import { QuizTooltip } from './QuizTooltip';
 
 interface QuizQuestionProps {
   question: Question;
 }
 
 export const QuizQuestion: React.FC<QuizQuestionProps> = ({ question }) => {
-  const { answers, setAnswer } = useQuiz();
+  const { answers, setAnswer, currentStep } = useQuiz();
   const currentAnswer = answers[question.id] || (question.type === 'multiple_choice' ? [] : '');
+
+  // Determine if we should show a tooltip
+  const shouldShowProgressTooltip = currentStep === 4; // Show on 5th question (index 4)
+  const shouldShowMilestoneTooltip = currentStep === 9 || currentStep === 14 || currentStep === 19; // 10th, 15th, 20th
 
   const renderQuestionInput = () => {
     switch (question.type) {
@@ -61,11 +66,17 @@ export const QuizQuestion: React.FC<QuizQuestionProps> = ({ question }) => {
   };
 
   return (
-    <div className="w-full space-y-8">
+    <div className="w-full space-y-6">
+      {shouldShowProgressTooltip && <QuizTooltip type="progress" step={5} />}
+      {shouldShowMilestoneTooltip && <QuizTooltip type="milestone" step={currentStep + 1} />}
+      
       <h2 className="text-xl font-semibold text-[#1e2b86] text-center">
         {question.question_text}
       </h2>
-      {renderQuestionInput()}
+      
+      <div className="mt-6">
+        {renderQuestionInput()}
+      </div>
     </div>
   );
 };

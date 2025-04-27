@@ -1,5 +1,7 @@
 
 import React from "react";
+import { Facebook, Instagram, Twitter } from "lucide-react";
+import { TiktokIcon } from "../icons/TiktokIcon";
 
 interface BusinessFooterProps {
   onContinue: () => void;
@@ -26,6 +28,22 @@ export const BusinessFooter: React.FC<BusinessFooterProps> = ({
 
       <div className="flex w-full max-w-[400px] flex-col items-stretch text-xs text-[#1e2b86] justify-center mt-6">
         <div className="self-center">Thitny.com</div>
+        
+        <div className="flex justify-center mt-3 space-x-4">
+          <a href="https://www.facebook.com/thitnyapp" target="_blank" rel="noopener noreferrer" className="text-[#465aea] hover:opacity-80 transition-opacity">
+            <Facebook size={18} />
+          </a>
+          <a href="https://www.instagram.com/thitny.app/" target="_blank" rel="noopener noreferrer" className="text-[#465aea] hover:opacity-80 transition-opacity">
+            <Instagram size={18} />
+          </a>
+          <a href="https://x.com/Thitny_App" target="_blank" rel="noopener noreferrer" className="text-[#465aea] hover:opacity-80 transition-opacity">
+            <Twitter size={18} />
+          </a>
+          <a href="https://www.tiktok.com/@thitnyapp" target="_blank" rel="noopener noreferrer" className="text-[#465aea] hover:opacity-80 transition-opacity">
+            <TiktokIcon size={18} />
+          </a>
+        </div>
+        
         <div className="flex w-full items-center gap-1 text-center leading-[1.4] justify-center mt-2">
           <div className="text-[rgba(70,90,234,1)] self-stretch my-auto">
             <span className="text-[#1e2b86]">Terms & Conditions</span>

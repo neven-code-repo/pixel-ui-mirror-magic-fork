@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { QuizData } from '@/types/quiz';
 import { QuizQuestion } from './QuizQuestion';
@@ -65,6 +66,19 @@ export const Quiz: React.FC<QuizProps> = ({ data }) => {
   };
 
   const shouldShowCarousel = currentStep === 0;
+  
+  // Check if current question is valid for continuing
+  const isCurrentQuestionValid = () => {
+    if (!currentQuestion) return false;
+    
+    // For open_text questions, always allow continue
+    if (currentQuestion.type === 'open_text') {
+      return true;
+    }
+    
+    // For all other question types, use the existing validation
+    return isValidAnswer(currentQuestion);
+  };
 
   if (showAnalysis) {
     return (
@@ -112,7 +126,7 @@ export const Quiz: React.FC<QuizProps> = ({ data }) => {
 
         <BusinessFooter 
           onContinue={handleContinue}
-          isValid={isValidAnswer(currentQuestion)}
+          isValid={isCurrentQuestionValid()}
         />
       </main>
     </div>

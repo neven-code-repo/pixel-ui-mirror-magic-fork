@@ -6,6 +6,7 @@ import { SingleChoice } from './QuestionTypes/SingleChoice';
 import { MultipleChoice } from './QuestionTypes/MultipleChoice';
 import { OpenText } from './QuestionTypes/OpenText';
 import { ContactInput } from './QuestionTypes/ContactInput';
+import { EmailInput } from './QuestionTypes/EmailInput';
 import { useQuiz } from '@/context/QuizContext';
 import { QuizTooltip } from './QuizTooltip';
 
@@ -56,6 +57,13 @@ export const QuizQuestion: React.FC<QuizQuestionProps> = ({ question }) => {
       case 'contact_input':
         return (
           <ContactInput
+            value={currentAnswer as string}
+            onChange={(value) => setAnswer(question.id, value)}
+          />
+        );
+      case 'email':
+        return (
+          <EmailInput
             value={currentAnswer as string}
             onChange={(value) => setAnswer(question.id, value)}
           />

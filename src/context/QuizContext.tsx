@@ -1,82 +1,64 @@
-import React, { createContext, useContext, useState } from 'react';
-import { Question, QuizAnswers } from '@/types/quiz';
 
-interface QuizContextType {
+import React, { createContext, useContext, useState } from 'react';
+import { QuizAnswers } from '@/types/quiz';
+
+interface QuizContextProps {
   currentStep: number;
-  answers: QuizAnswers;
   setCurrentStep: (step: number) => void;
-  setAnswer: (questionId: string, answer: string | string[]) => void;
-  isValidAnswer: (question: Question) => boolean;
-  submitQuizAnswers: (email: string) => void;
+  answers: QuizAnswers;
+  setAnswer: (questionId: string, value: string | string[]) => void;
+  isValidAnswer: (question: any) => boolean;
+  quizStartTime: string;
 }
 
-const QuizContext = createContext<QuizContextType | undefined>(undefined);
+const QuizContext = createContext<QuizContextProps | undefined>(undefined);
 
 export const QuizProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<QuizAnswers>({});
+  // Store the timestamp when the quiz starts
+  const [quizStartTime] = useState<string>(() => new Date().getTime().toString());
 
-  const setAnswer = (questionId: string, answer: string | string[]) => {
+  const setAnswer = (questionId: string, value: string | string[]) => {
     setAnswers((prev) => ({
       ...prev,
-      [questionId]: answer,
+      [questionId]: value,
     }));
   };
 
-  const isValidAnswer = (question: Question): boolean => {
-    if (!answers[question.id]) return false;
-    
-    if (question.type === 'combined_text') {
-      const answer = answers[question.id] as string;
-      return answer.includes(',') && answer.split(',').every(part => part.trim().length > 0);
-    }
-    
+  // Check if the current question has a valid answer
+  const isValidAnswer = (question: any) => {
+    const answer = answers[question.id];
+
     if (question.type === 'multiple_choice') {
-      return (answers[question.id] as string[]).length > 0;
+      return Array.isArray(answer) && answer.length > 0;
+    } else if (question.type === 'contact_input' || question.type === 'email_input') {
+      // For contact/email inputs, check if there's any value
+      return Boolean(answer);
+    } else if (question.type === 'open_text') {
+      // For open text, can be empty
+      return true;
+    } else if (question.type === 'single_choice_with_url') {
+      // For "Yes" option, check if URL is provided
+      if (typeof answer === 'string' && answer.startsWith('Yes|')) {
+        return answer.split('|')[1].trim() !== '';
+      }
+      return Boolean(answer);
     }
     
-    return (answers[question.id] as string).trim().length > 0;
-  };
-
-  const submitQuizAnswers = async (email: string) => {
-    try {
-      const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          service_id: 'service_qkkexhr',
-          template_id: 'template_8po8lyj',
-          user_id: 'user_k5C9TjhZ8KJ9Y5Q2X',
-          template_params: {
-            to_email: 'bojan.milekic@gmail.com',
-            subject: 'New business finished quiz',
-            user_email: email,
-            quiz_data: JSON.stringify(answers),
-          },
-        }),
-      });
-
-      if (!response.ok) {
-        console.error('Failed to send email');
-      }
-    } catch (error) {
-      console.error('Error sending email:', error);
-    }
+    // For all other types, just check if there's a value
+    return Boolean(answer);
   };
 
   return (
-    <QuizContext.Provider
-      value={{
-        currentStep,
-        answers,
-        setCurrentStep,
-        setAnswer,
-        isValidAnswer,
-        submitQuizAnswers,
-      }}
-    >
+    <QuizContext.Provider value={{ 
+      currentStep, 
+      setCurrentStep, 
+      answers, 
+      setAnswer,
+      isValidAnswer,
+      quizStartTime
+    }}>
       {children}
     </QuizContext.Provider>
   );
@@ -84,8 +66,10 @@ export const QuizProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
 export const useQuiz = () => {
   const context = useContext(QuizContext);
-  if (!context) {
+  
+  if (context === undefined) {
     throw new Error('useQuiz must be used within a QuizProvider');
   }
+  
   return context;
 };

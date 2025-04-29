@@ -1,4 +1,3 @@
-
 {
   "questions": [
     {
@@ -65,7 +64,12 @@
       "id": "q7",
       "question_text": "How often do you post or update your social media channels?",
       "type": "single_choice",
-      "options": ["Daily", "A few times a week", "Once a week", "Rarely/Not regularly"],
+      "options": [
+        "🔥 Daily",
+        "⚡ A few times a week",
+        "🌱 Once a week",
+        "🐌 Rarely/Not regularly"
+      ],
       "variable": "#smm-schedule",
       "condition": {
         "depends_on": "q6",
@@ -157,7 +161,12 @@
       "id": "q15",
       "question_text": "How many hours per week do you spend managing your online presence?",
       "type": "single_choice",
-      "options": ["Under 1 hour", "1–3 hours", "3–5 hours", "Over 5 hours"],
+      "options": [
+        "⏱️ Under 1 hour",
+        "⏰ 1–3 hours", 
+        "⌚ 3–5 hours", 
+        "⌛ Over 5 hours"
+      ],
       "variable": "#time-social"
     },
     {
@@ -196,7 +205,12 @@
       "id": "q19",
       "question_text": "How often do you respond to online reviews (positive or negative)?",
       "type": "single_choice",
-      "options": ["Always (promptly)", "Sometimes", "Rarely", "Never"],
+      "options": [
+        "🚀 Always (promptly)", 
+        "🏃 Sometimes", 
+        "🚶 Rarely", 
+        "🧍 Never"
+      ],
       "variable": "#reputation-often"
     },
     {

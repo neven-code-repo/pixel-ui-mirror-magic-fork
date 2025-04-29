@@ -3,26 +3,63 @@ import React, { useEffect } from 'react';
 import { CompletionScreenProps } from '@/types/quiz';
 import { BusinessProgress } from '../business-form/BusinessProgress';
 import { useQuiz } from '@/context/QuizContext';
+import quizData from '@/data/quiz-data.json';
 
 export const CompletionScreen: React.FC<CompletionScreenProps> = ({ onContinue }) => {
-  const { answers } = useQuiz();
+  const { answers, quizStartTime } = useQuiz();
 
   useEffect(() => {
+    // Format data for Make.com webhook
+    const formatDataForMake = () => {
+      // Find business name from answers (q1)
+      const businessName = answers['q1'] ? 
+        (answers['q1'] as string).split('|')[0].trim() : 
+        'Unknown Business';
+      
+      // Create quiz data with question-answer pairs
+      const quizDataFormatted: Record<string, string> = {};
+      
+      Object.keys(answers).forEach(questionId => {
+        // Find the question text from the quiz data
+        const questionObj = quizData.questions.find(q => q.id === questionId);
+        const questionText = questionObj ? questionObj.question_text : `Question ${questionId}`;
+        
+        // Format the answer (could be string or array)
+        const answerValue = answers[questionId];
+        const formattedAnswer = Array.isArray(answerValue) ? 
+          answerValue.join('|') : 
+          answerValue as string;
+        
+        // Add to formatted data
+        quizDataFormatted[`${questionId}-question`] = questionText;
+        quizDataFormatted[`${questionId}-answer`] = formattedAnswer;
+      });
+      
+      // Create the final payload
+      return {
+        id: quizStartTime || new Date().getTime().toString(),
+        name: businessName,
+        "quiz-data": quizDataFormatted,
+        submitted_at: new Date().toISOString(),
+        source: window.location.href
+      };
+    };
+
     // Send data to Make.com webhook
     const sendDataToMake = async () => {
       try {
-        await fetch('https://hook.eu2.make.com/xfki0ndrt9r43yi7x5v8kpw3ath7glhh', {
+        const formattedData = formatDataForMake();
+        
+        const response = await fetch('https://hook.eu2.make.com/xfki0ndrt9r43yi7x5v8kpw3ath7glhh', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            answers: answers,
-            submitted_at: new Date().toISOString(),
-            source: window.location.href
-          }),
+          body: JSON.stringify(formattedData),
         });
-        console.log('Data successfully sent to Make.com webhook');
+        
+        console.log('Data sent to Make.com webhook with status:', response.status);
+        console.log('Formatted data sent:', formattedData);
       } catch (error) {
         console.error('Error sending data to Make.com webhook:', error);
       }
@@ -36,7 +73,7 @@ export const CompletionScreen: React.FC<CompletionScreenProps> = ({ onContinue }
     }, 5000);
 
     return () => clearTimeout(redirectTimer);
-  }, [answers]);
+  }, [answers, quizStartTime]);
 
   return (
     <div className="w-full flex-1 flex flex-col items-center justify-center py-8 px-6">

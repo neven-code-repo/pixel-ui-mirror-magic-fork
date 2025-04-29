@@ -2,15 +2,41 @@
 import React, { useEffect } from 'react';
 import { CompletionScreenProps } from '@/types/quiz';
 import { BusinessProgress } from '../business-form/BusinessProgress';
+import { useQuiz } from '@/context/QuizContext';
 
 export const CompletionScreen: React.FC<CompletionScreenProps> = ({ onContinue }) => {
+  const { answers } = useQuiz();
+
   useEffect(() => {
+    // Send data to Make.com webhook
+    const sendDataToMake = async () => {
+      try {
+        await fetch('https://hook.eu2.make.com/xfki0ndrt9r43yi7x5v8kpw3ath7glhh', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            answers: answers,
+            submitted_at: new Date().toISOString(),
+            source: window.location.href
+          }),
+        });
+        console.log('Data successfully sent to Make.com webhook');
+      } catch (error) {
+        console.error('Error sending data to Make.com webhook:', error);
+      }
+    };
+
+    sendDataToMake();
+
+    // Set redirect timer
     const redirectTimer = setTimeout(() => {
       window.location.href = 'https://app.thitny.com';
     }, 5000);
 
     return () => clearTimeout(redirectTimer);
-  }, []);
+  }, [answers]);
 
   return (
     <div className="w-full flex-1 flex flex-col items-center justify-center py-8 px-6">

@@ -2,6 +2,8 @@
 import React from 'react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
+import { Facebook, Instagram, Linkedin } from 'lucide-react';
+import { TiktokIcon } from '@/components/icons/TiktokIcon';
 
 interface MultipleChoiceProps {
   options: string[];
@@ -36,10 +38,50 @@ export const MultipleChoice: React.FC<MultipleChoiceProps> = ({ options, value, 
     };
   };
 
+  // Function to get social media icon for specific platforms
+  const getSocialIcon = (option: string) => {
+    const platform = option.toLowerCase();
+    if (platform === 'facebook') {
+      return <Facebook className="mr-3 text-[#1877F2]" size={24} />;
+    } else if (platform === 'instagram') {
+      return <Instagram className="mr-3 text-[#E1306C]" size={24} />;
+    } else if (platform === 'linkedin') {
+      return <Linkedin className="mr-3 text-[#0077B5]" size={24} />;
+    } else if (platform === 'tiktok') {
+      return <TiktokIcon className="mr-3 text-black" size={24} />;
+    } else if (platform.includes('twitter') || platform.includes('x')) {
+      // Using the renderIcon prop for Twitter/X icon
+      return (
+        <svg 
+          className="mr-3"
+          width="24" 
+          height="24" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path 
+            d="M17.1761 4H20.3037L14.0516 11.0948L21.5 21H15.3166L10.9847 15.2663L5.95132 21H2.82132L9.47663 13.4452L2.33337 4H8.64468L12.5732 9.19474L17.1761 4ZM16.145 19.4224H17.6761L7.79047 5.52066H6.14626L16.145 19.4224Z" 
+            fill="#000000"
+          />
+        </svg>
+      );
+    }
+    return null;
+  };
+
+  // Check if this is the social media question (q6)
+  const isSocialMediaQuestion = options.some(opt => 
+    ['facebook', 'instagram', 'linkedin', 'tiktok', 'twitter', 'none'].map(s => s.toLowerCase())
+      .includes(opt.toLowerCase())
+  );
+
   return (
     <div className="space-y-3">
       {options.map((option, index) => {
         const { emoji, text } = extractEmoji(option);
+        const socialIcon = isSocialMediaQuestion ? getSocialIcon(option) : null;
+        
         return (
           <div 
             key={index} 
@@ -56,13 +98,13 @@ export const MultipleChoice: React.FC<MultipleChoiceProps> = ({ options, value, 
               className="mr-3"
             />
             <Label htmlFor={`option-${index}`} className="flex items-center text-base text-[#1e2b86] cursor-pointer w-full">
-              {emoji && <span className="text-xl mr-2">{emoji}</span>}
+              {socialIcon ? socialIcon : emoji && <span className="text-xl mr-2">{emoji}</span>}
               {text}
             </Label>
           </div>
         );
       })}
-      <p className="text-sm text-gray-500 italic mt-2">You can select multiple answers for this question</p>
+      <p className="text-sm text-gray-500 italic mt-2">*multiple answers possible</p>
     </div>
   );
 };

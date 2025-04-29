@@ -21,7 +21,7 @@ export const EmailInput: React.FC<EmailInputProps> = ({ value, onChange }) => {
         <div className="flex items-center">
           <span className="text-2xl mr-3">🎁</span>
           <p className="text-sm text-[#1e2b86]">
-            Complete the quiz to receive your <strong>FREE personalized business audit</strong> (valued at $599+ by consulting companies)
+            Please enter email where we can send your <strong>FREE personalized business audit</strong> (valued at $599+ by consulting companies like PwC, Deloitte)
           </p>
         </div>
       </div>

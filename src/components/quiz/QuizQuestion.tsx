@@ -7,6 +7,7 @@ import { MultipleChoice } from './QuestionTypes/MultipleChoice';
 import { OpenText } from './QuestionTypes/OpenText';
 import { ContactInput } from './QuestionTypes/ContactInput';
 import { EmailInput } from './QuestionTypes/EmailInput';
+import { SingleChoiceWithUrl } from './QuestionTypes/SingleChoiceWithUrl';
 import { useQuiz } from '@/context/QuizContext';
 import { QuizTooltip } from './QuizTooltip';
 
@@ -34,6 +35,14 @@ export const QuizQuestion: React.FC<QuizQuestionProps> = ({ question }) => {
       case 'single_choice':
         return (
           <SingleChoice
+            options={question.options || []}
+            value={currentAnswer as string}
+            onChange={(value) => setAnswer(question.id, value)}
+          />
+        );
+      case 'single_choice_with_url':
+        return (
+          <SingleChoiceWithUrl
             options={question.options || []}
             value={currentAnswer as string}
             onChange={(value) => setAnswer(question.id, value)}

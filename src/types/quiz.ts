@@ -1,5 +1,5 @@
 
-export type QuestionType = 'combined_text' | 'single_choice' | 'multiple_choice' | 'open_text' | 'contact_input' | 'email_input';
+export type QuestionType = 'combined_text' | 'single_choice' | 'multiple_choice' | 'open_text' | 'contact_input' | 'email_input' | 'single_choice_with_url';
 
 export interface Question {
   id: string;

@@ -29,7 +29,7 @@
     {
       "id": "q3",
       "question_text": "What is the main challenge or reason you want to improve your online presence?",
-      "type": "single_choice",
+      "type": "multiple_choice",
       "options": [
         "✅ I want to attract more customers or leads",
         "🟢 I'm not seeing good results from my current online efforts",
@@ -50,7 +50,7 @@
     {
       "id": "q5",
       "question_text": "Do you currently have a business website?",
-      "type": "single_choice",
+      "type": "single_choice_with_url",
       "options": ["Yes", "No", "Planning to create one"],
       "variable": "#website"
     },

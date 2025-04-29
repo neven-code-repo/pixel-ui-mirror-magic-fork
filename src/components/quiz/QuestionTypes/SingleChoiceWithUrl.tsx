@@ -11,19 +11,18 @@ interface SingleChoiceWithUrlProps {
 }
 
 export const SingleChoiceWithUrl: React.FC<SingleChoiceWithUrlProps> = ({ options, value, onChange }) => {
-  const [websiteUrl, setWebsiteUrl] = useState('');
-  const selectedOption = value.includes('http') ? value.split('|')[0] : value;
+  // Parse the initial value to extract the selected option and URL
+  const [selectedOption, setSelectedOption] = useState<string>(() => {
+    return value.includes('|') ? value.split('|')[0] : value;
+  });
   
-  // Extract URL from value if it exists
-  useEffect(() => {
-    if (value.includes('|')) {
-      const url = value.split('|')[1];
-      setWebsiteUrl(url);
-    }
-  }, [value]);
-
+  const [websiteUrl, setWebsiteUrl] = useState<string>(() => {
+    return value.includes('|') ? value.split('|')[1] : '';
+  });
+  
   // Handle option change
   const handleOptionChange = (option: string) => {
+    setSelectedOption(option);
     if (option === 'Yes' && websiteUrl) {
       onChange(`${option}|${websiteUrl}`);
     } else {
@@ -88,7 +87,7 @@ export const SingleChoiceWithUrl: React.FC<SingleChoiceWithUrlProps> = ({ option
                 <div className="mt-3 ml-8">
                   <Input 
                     type="url"
-                    placeholder="Enter your website URL (e.g., https://example.com)"
+                    placeholder="Please enter your website URL (e.g., https://example.com)"
                     value={websiteUrl}
                     onChange={handleUrlChange}
                     className="text-[#1e2b86]"

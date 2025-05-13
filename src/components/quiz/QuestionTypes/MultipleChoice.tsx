@@ -2,16 +2,19 @@
 import React from 'react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
-import { Facebook, Instagram, Linkedin } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Pinterest, Youtube, Bulb } from 'lucide-react';
 import { TiktokIcon } from '@/components/icons/TiktokIcon';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 
 interface MultipleChoiceProps {
   options: string[];
   value: string[];
   onChange: (value: string[]) => void;
+  questionId?: string;
 }
 
-export const MultipleChoice: React.FC<MultipleChoiceProps> = ({ options, value, onChange }) => {
+export const MultipleChoice: React.FC<MultipleChoiceProps> = ({ options, value, onChange, questionId }) => {
   const handleChange = (option: string) => {
     if (value.includes(option)) {
       onChange(value.filter((v) => v !== option));
@@ -49,6 +52,10 @@ export const MultipleChoice: React.FC<MultipleChoiceProps> = ({ options, value, 
       return <Linkedin className="mr-3 text-[#0077B5]" size={24} />;
     } else if (platform === 'tiktok') {
       return <TiktokIcon className="mr-3 text-black" size={24} />;
+    } else if (platform === 'pinterest') {
+      return <Pinterest className="mr-3 text-[#E60023]" size={24} />;
+    } else if (platform === 'youtube') {
+      return <Youtube className="mr-3 text-[#FF0000]" size={24} />;
     } else if (platform.includes('twitter') || platform.includes('x')) {
       // Using the renderIcon prop for Twitter/X icon
       return (
@@ -72,9 +79,15 @@ export const MultipleChoice: React.FC<MultipleChoiceProps> = ({ options, value, 
 
   // Check if this is the social media question (q6)
   const isSocialMediaQuestion = options.some(opt => 
-    ['facebook', 'instagram', 'linkedin', 'tiktok', 'twitter', 'none'].map(s => s.toLowerCase())
+    ['facebook', 'instagram', 'linkedin', 'tiktok', 'twitter', 'pinterest', 'youtube', 'none'].map(s => s.toLowerCase())
       .includes(opt.toLowerCase())
   );
+
+  // Check if this is the obstacle question (q8)
+  const isObstacleQuestion = questionId === 'q8';
+
+  // Check if this is the data collection question (q25)
+  const isDataCollectionQuestion = questionId === 'q25';
 
   return (
     <div className="space-y-3">
@@ -104,6 +117,31 @@ export const MultipleChoice: React.FC<MultipleChoiceProps> = ({ options, value, 
           </div>
         );
       })}
+
+      {isObstacleQuestion && (
+        <div className="mt-4 bg-[#EDF7FF] border border-[#C5E0FF] p-3 rounded-md text-sm text-[#1e2b86]">
+          <p className="font-medium">Interesting fact: 90% of businesses in your niche are facing similar problems</p>
+        </div>
+      )}
+
+      {isDataCollectionQuestion && (
+        <div className="mt-4">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div className="inline-flex items-center bg-[#F2F5FF] border border-[#D0D9F2] px-3 py-1.5 rounded-md text-[#1e2b86] cursor-help">
+                  <Bulb size={16} className="mr-2 text-[#465aea]" />
+                  <span className="text-sm">Business tip</span>
+                </div>
+              </TooltipTrigger>
+              <TooltipContent className="bg-white border border-[#E2E8F6] p-3 max-w-xs shadow-lg">
+                <p className="text-sm text-[#1e2b86]">In current business environment, proper business data collect, process and action is must-have</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
+      )}
+
       <p className="text-sm text-gray-500 italic mt-2">*multiple answers possible</p>
     </div>
   );

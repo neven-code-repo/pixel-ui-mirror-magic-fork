@@ -57,7 +57,7 @@
       "id": "q6",
       "question_text": "Which social media platforms do you use for your business (if any)?",
       "type": "multiple_choice",
-      "options": ["Facebook", "Instagram", "LinkedIn", "TikTok", "Twitter/X", "None"],
+      "options": ["Facebook", "Instagram", "LinkedIn", "TikTok", "Twitter/X", "Pinterest", "Youtube", "None"],
       "variable": "#social-networks"
     },
     {

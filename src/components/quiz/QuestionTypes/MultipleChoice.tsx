@@ -2,7 +2,7 @@
 import React from 'react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
-import { Facebook, Instagram, Linkedin, Pinterest, Youtube, Bulb } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, LightbulbIcon, Youtube } from 'lucide-react';
 import { TiktokIcon } from '@/components/icons/TiktokIcon';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
@@ -53,7 +53,22 @@ export const MultipleChoice: React.FC<MultipleChoiceProps> = ({ options, value, 
     } else if (platform === 'tiktok') {
       return <TiktokIcon className="mr-3 text-black" size={24} />;
     } else if (platform === 'pinterest') {
-      return <Pinterest className="mr-3 text-[#E60023]" size={24} />;
+      // Using a custom SVG for Pinterest since it's not in lucide-react
+      return (
+        <svg 
+          className="mr-3"
+          width="24" 
+          height="24" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path 
+            d="M12 2C6.477 2 2 6.477 2 12C2 16.237 4.636 19.855 8.356 21.312C8.268 20.504 8.189 19.27 8.391 18.338C8.573 17.5 9.563 13.521 9.563 13.521C9.563 13.521 9.238 12.877 9.238 11.934C9.238 10.445 10.067 9.339 11.111 9.339C12.001 9.339 12.429 10.012 12.429 10.812C12.429 11.712 11.854 13.033 11.559 14.258C11.312 15.278 12.08 16.105 13.085 16.105C14.921 16.105 16.358 14.135 16.358 11.362C16.358 8.876 14.58 7.106 11.944 7.106C8.899 7.106 7.163 9.229 7.163 11.797C7.163 12.701 7.461 13.346 7.929 13.903C8.131 14.146 8.156 14.241 8.089 14.522C8.04 14.736 7.926 15.223 7.88 15.425C7.815 15.705 7.593 15.792 7.336 15.69C5.96 15.116 5.246 13.422 5.246 11.539C5.246 8.372 7.553 5.391 12.216 5.391C15.959 5.391 18.704 7.914 18.704 11.264C18.704 14.965 16.421 17.787 13.285 17.787C12.245 17.787 11.271 17.252 10.947 16.629C10.947 16.629 10.427 18.535 10.315 18.948C10.111 19.717 9.647 20.487 9.222 21.06C10.111 21.34 11.041 21.5 12 21.5C17.523 21.5 22 17.023 22 12C22 6.477 17.523 2 12 2Z" 
+            fill="#E60023"
+          />
+        </svg>
+      );
     } else if (platform === 'youtube') {
       return <Youtube className="mr-3 text-[#FF0000]" size={24} />;
     } else if (platform.includes('twitter') || platform.includes('x')) {
@@ -130,7 +145,7 @@ export const MultipleChoice: React.FC<MultipleChoiceProps> = ({ options, value, 
             <Tooltip>
               <TooltipTrigger asChild>
                 <div className="inline-flex items-center bg-[#F2F5FF] border border-[#D0D9F2] px-3 py-1.5 rounded-md text-[#1e2b86] cursor-help">
-                  <Bulb size={16} className="mr-2 text-[#465aea]" />
+                  <LightbulbIcon size={16} className="mr-2 text-[#465aea]" />
                   <span className="text-sm">Business tip</span>
                 </div>
               </TooltipTrigger>
@@ -146,3 +161,4 @@ export const MultipleChoice: React.FC<MultipleChoiceProps> = ({ options, value, 
     </div>
   );
 };
+

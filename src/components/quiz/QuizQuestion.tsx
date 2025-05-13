@@ -38,7 +38,6 @@ export const QuizQuestion: React.FC<QuizQuestionProps> = ({ question }) => {
             options={question.options || []}
             value={currentAnswer as string}
             onChange={(value) => setAnswer(question.id, value)}
-            questionId={question.id}
           />
         );
       case 'single_choice_with_url':
@@ -99,3 +98,4 @@ export const QuizQuestion: React.FC<QuizQuestionProps> = ({ question }) => {
     </div>
   );
 };
+

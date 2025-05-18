@@ -115,8 +115,8 @@ export const MultipleChoice: React.FC<MultipleChoiceProps> = ({ options, value, 
             key={index} 
             className={`flex items-center p-4 rounded-lg border transition-colors ${
               value.includes(option) ? 
-              'bg-[#F2F5FF] border-[#465aea]' : 
-              'bg-white border-[#E2E8F6] hover:bg-[#F8FAFF]'
+              'bg-[#e3f0ff] border-[#1a73e8]' : 
+              'bg-white border-[#c7dcf7] hover:bg-[#f2f8ff]'
             }`}
           >
             <Checkbox
@@ -125,7 +125,7 @@ export const MultipleChoice: React.FC<MultipleChoiceProps> = ({ options, value, 
               onCheckedChange={() => handleChange(option)}
               className="mr-3"
             />
-            <Label htmlFor={`option-${index}`} className="flex items-center text-base text-[#1e2b86] cursor-pointer w-full">
+            <Label htmlFor={`option-${index}`} className="flex items-center text-base text-[#1a4b8a] cursor-pointer w-full">
               {socialIcon ? socialIcon : emoji && <span className="text-xl mr-2">{emoji}</span>}
               {text}
             </Label>
@@ -134,8 +134,8 @@ export const MultipleChoice: React.FC<MultipleChoiceProps> = ({ options, value, 
       })}
 
       {isObstacleQuestion && (
-        <div className="mt-4 bg-[#EDF7FF] border border-[#C5E0FF] p-3 rounded-md text-sm text-[#1e2b86]">
-          <p className="font-medium">Interesting fact: 90% of businesses in your niche are facing similar problems</p>
+        <div className="mt-4 bg-[#e3f0ff] border border-[#a8d1ff] p-3 rounded-md text-sm text-[#1a4b8a]">
+          <p className="font-medium">Interesting fact: 90% of pool service businesses in Florida face similar challenges</p>
         </div>
       )}
 
@@ -144,21 +144,20 @@ export const MultipleChoice: React.FC<MultipleChoiceProps> = ({ options, value, 
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <div className="inline-flex items-center bg-[#F2F5FF] border border-[#D0D9F2] px-3 py-1.5 rounded-md text-[#1e2b86] cursor-help">
-                  <LightbulbIcon size={16} className="mr-2 text-[#465aea]" />
-                  <span className="text-sm">Business tip</span>
+                <div className="inline-flex items-center bg-[#e3f0ff] border border-[#a8d1ff] px-3 py-1.5 rounded-md text-[#1a4b8a] cursor-help">
+                  <LightbulbIcon size={16} className="mr-2 text-[#1a73e8]" />
+                  <span className="text-sm">Pool service tip</span>
                 </div>
               </TooltipTrigger>
-              <TooltipContent className="bg-white border border-[#E2E8F6] p-3 max-w-xs shadow-lg">
-                <p className="text-sm text-[#1e2b86]">In current business environment, proper business data collect, process and action is must-have</p>
+              <TooltipContent className="bg-white border border-[#c7dcf7] p-3 max-w-xs shadow-lg">
+                <p className="text-sm text-[#1a4b8a]">In the Florida pool service industry, proper data collection helps provide better service during high-demand summer months</p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
         </div>
       )}
 
-      <p className="text-sm text-gray-500 italic mt-2">*multiple answers possible</p>
+      <p className="text-sm text-[#5b7da0] italic mt-2">*multiple answers possible</p>
     </div>
   );
 };
-

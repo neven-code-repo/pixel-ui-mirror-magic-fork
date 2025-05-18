@@ -71,12 +71,12 @@ export const SingleChoiceWithUrl: React.FC<SingleChoiceWithUrlProps> = ({ option
               <div 
                 className={`flex items-center p-4 rounded-lg border transition-colors ${
                   selectedOption === option ? 
-                  'bg-[#F2F5FF] border-[#465aea]' : 
-                  'bg-white border-[#E2E8F6] hover:bg-[#F8FAFF]'
+                  'bg-[#e3f0ff] border-[#1a73e8]' : 
+                  'bg-white border-[#c7dcf7] hover:bg-[#f2f8ff]'
                 }`}
               >
                 <RadioGroupItem value={option} id={`option-${index}`} className="mr-3" />
-                <Label htmlFor={`option-${index}`} className="flex items-center text-base text-[#1e2b86] cursor-pointer w-full">
+                <Label htmlFor={`option-${index}`} className="flex items-center text-base text-[#1a4b8a] cursor-pointer w-full">
                   {emoji && <span className="text-xl mr-2">{emoji}</span>}
                   {text}
                 </Label>
@@ -90,7 +90,7 @@ export const SingleChoiceWithUrl: React.FC<SingleChoiceWithUrlProps> = ({ option
                     placeholder="Please enter your website URL (e.g., https://example.com)"
                     value={websiteUrl}
                     onChange={handleUrlChange}
-                    className="text-[#1e2b86]"
+                    className="text-[#1a4b8a]"
                   />
                 </div>
               )}

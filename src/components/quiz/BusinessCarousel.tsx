@@ -7,11 +7,11 @@ import {
 } from "@/components/ui/carousel";
 
 const businesses = [
-  { name: "Papa Joe Burger", city: "Columbus, Ohio", emoji: "🍔" },
-  { name: "Fresh Cuts Salon", city: "Phoenix, Arizona", emoji: "💇" },
-  { name: "Green Thumb Gardens", city: "Portland, Oregon", emoji: "🌿" },
-  { name: "Tech Solutions Pro", city: "Austin, Texas", emoji: "💻" },
-  { name: "Sweet Treats Bakery", city: "Miami, Florida", emoji: "🧁" },
+  { name: "Splash Pool Services", city: "Miami, Florida", emoji: "🏊" },
+  { name: "Clear Waters Pool Care", city: "Orlando, Florida", emoji: "💧" },
+  { name: "Blue Lagoon Pools", city: "Tampa, Florida", emoji: "🌊" },
+  { name: "Sunshine Pool Maintenance", city: "Jacksonville, Florida", emoji: "☀️" },
+  { name: "Gulf Coast Pools", city: "Naples, Florida", emoji: "🐬" },
 ];
 
 export const BusinessCarousel: React.FC = () => {
@@ -31,10 +31,10 @@ export const BusinessCarousel: React.FC = () => {
         <CarouselContent>
           {businesses.map((business, index) => (
             <CarouselItem key={index} className={`${index === currentIndex ? 'block' : 'hidden'}`}>
-              <div className="text-sm text-[#1e2b86] bg-[#E5DEFF] p-3 rounded-lg">
+              <div className="text-sm text-[#1a4b8a] bg-[#e3f0ff] p-3 rounded-lg">
                 <span className="mr-2">{business.emoji}</span>
                 <span className="font-medium">{business.name}</span>
-                <span className="text-[#1e2b86]/70"> from {business.city} just completed the quiz</span>
+                <span className="text-[#1a4b8a]/70"> from {business.city} just completed the quiz</span>
               </div>
             </CarouselItem>
           ))}

@@ -88,7 +88,7 @@ export const QuizQuestion: React.FC<QuizQuestionProps> = ({ question }) => {
       {shouldShowProgressTooltip && <QuizTooltip type="progress" step={5} />}
       {shouldShowMilestoneTooltip && <QuizTooltip type="milestone" step={currentStep + 1} />}
       
-      <h2 className="text-xl font-semibold text-[#1e2b86] text-center">
+      <h2 className="text-xl font-semibold text-[#1a4b8a] text-center">
         {question.question_text}
       </h2>
       
@@ -98,4 +98,3 @@ export const QuizQuestion: React.FC<QuizQuestionProps> = ({ question }) => {
     </div>
   );
 };
-

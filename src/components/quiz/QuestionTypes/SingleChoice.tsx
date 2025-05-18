@@ -41,12 +41,12 @@ export const SingleChoice: React.FC<SingleChoiceProps> = ({ options, value, onCh
             key={index} 
             className={`flex items-center p-4 rounded-lg border transition-colors ${
               value === option ? 
-              'bg-[#F2F5FF] border-[#465aea]' : 
-              'bg-white border-[#E2E8F6] hover:bg-[#F8FAFF]'
+              'bg-[#e3f0ff] border-[#1a73e8]' : 
+              'bg-white border-[#c7dcf7] hover:bg-[#f2f8ff]'
             }`}
           >
             <RadioGroupItem value={option} id={`option-${index}`} className="mr-3" />
-            <Label htmlFor={`option-${index}`} className="flex items-center text-base text-[#1e2b86] cursor-pointer w-full">
+            <Label htmlFor={`option-${index}`} className="flex items-center text-base text-[#1a4b8a] cursor-pointer w-full">
               {emoji && <span className="text-xl mr-2">{emoji}</span>}
               {text}
             </Label>

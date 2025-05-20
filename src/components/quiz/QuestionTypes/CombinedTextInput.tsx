@@ -8,14 +8,25 @@ interface CombinedTextInputProps {
 }
 
 export const CombinedTextInput: React.FC<CombinedTextInputProps> = ({ value, onChange }) => {
-  const [businessName, location] = value.split(',').map(s => s.trim());
+  // Find the last comma in the string to separate business name and location
+  const lastCommaIndex = value.lastIndexOf(',');
+  
+  // If there's a comma, split at the last comma. Otherwise, assume it's all business name
+  const businessName = lastCommaIndex !== -1 ? value.substring(0, lastCommaIndex) : value;
+  const location = lastCommaIndex !== -1 ? value.substring(lastCommaIndex + 1).trim() : '';
 
   const handleBusinessNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(`${e.target.value},${location || ''}`);
+    const newBusinessName = e.target.value;
+    if (location) {
+      onChange(`${newBusinessName},${location}`);
+    } else {
+      onChange(newBusinessName);
+    }
   };
 
   const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(`${businessName || ''},${e.target.value}`);
+    const newLocation = e.target.value;
+    onChange(`${businessName}${newLocation ? ',' : ''}${newLocation}`);
   };
 
   return (
@@ -24,14 +35,14 @@ export const CombinedTextInput: React.FC<CombinedTextInputProps> = ({ value, onC
         label="Business Name"
         placeholder="Happy Pets Grooming"
         name="businessName"
-        value={businessName || ''}
+        value={businessName}
         onChange={handleBusinessNameChange}
       />
       <BusinessInput
         label="Location"
         placeholder="Miami, Florida"
         name="location"
-        value={location || ''}
+        value={location}
         onChange={handleLocationChange}
       />
     </div>

@@ -2,6 +2,18 @@
 import React from 'react';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
+import { 
+  CheckCircle, 
+  XCircle, 
+  AlertCircle, 
+  HelpCircle, 
+  Building, 
+  Home, 
+  User, 
+  Users, 
+  Calendar,
+  DollarSign
+} from 'lucide-react';
 
 interface SingleChoiceProps {
   options: string[];
@@ -28,6 +40,25 @@ export const SingleChoice: React.FC<SingleChoiceProps> = ({ options, value, onCh
     };
   };
 
+  // Function to determine which icon to use based on the option text
+  const getIconForOption = (text: string) => {
+    const lowerText = text.toLowerCase();
+    
+    if (lowerText.includes('yes')) return <CheckCircle className="mr-2 text-[#22c55e]" size={20} />;
+    if (lowerText.includes('no')) return <XCircle className="mr-2 text-[#ef4444]" size={20} />;
+    if (lowerText.includes('not sure') || lowerText.includes('maybe')) return <HelpCircle className="mr-2 text-[#eab308]" size={20} />;
+    if (lowerText.includes('important')) return <AlertCircle className="mr-2 text-[#1a73e8]" size={20} />;
+    if (lowerText.includes('business')) return <Building className="mr-2 text-[#1a73e8]" size={20} />;
+    if (lowerText.includes('home')) return <Home className="mr-2 text-[#1a73e8]" size={20} />;
+    if (lowerText.includes('month') || lowerText.includes('year') || lowerText.includes('day')) return <Calendar className="mr-2 text-[#1a73e8]" size={20} />;
+    if (lowerText.includes('client') || lowerText.includes('customer')) return <User className="mr-2 text-[#1a73e8]" size={20} />;
+    if (lowerText.includes('team') || lowerText.includes('staff') || lowerText.includes('employees')) return <Users className="mr-2 text-[#1a73e8]" size={20} />;
+    if (lowerText.includes('$') || lowerText.includes('money') || lowerText.includes('cost') || lowerText.includes('price')) return <DollarSign className="mr-2 text-[#1a73e8]" size={20} />;
+    
+    // Default icon for items that don't match any pattern
+    return <CheckCircle className="mr-2 text-[#1a73e8]" size={20} />;
+  };
+
   return (
     <RadioGroup
       value={value}
@@ -36,6 +67,8 @@ export const SingleChoice: React.FC<SingleChoiceProps> = ({ options, value, onCh
     >
       {options.map((option, index) => {
         const { emoji, text } = extractEmoji(option);
+        const icon = emoji ? null : getIconForOption(text);
+        
         return (
           <div 
             key={index} 
@@ -47,7 +80,7 @@ export const SingleChoice: React.FC<SingleChoiceProps> = ({ options, value, onCh
           >
             <RadioGroupItem value={option} id={`option-${index}`} className="mr-3" />
             <Label htmlFor={`option-${index}`} className="flex items-center text-base text-[#1a4b8a] cursor-pointer w-full">
-              {emoji && <span className="text-xl mr-2">{emoji}</span>}
+              {emoji ? <span className="text-xl mr-2">{emoji}</span> : icon}
               {text}
             </Label>
           </div>

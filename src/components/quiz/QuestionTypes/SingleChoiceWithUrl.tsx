@@ -3,6 +3,19 @@ import React, { useState, useEffect } from 'react';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { 
+  CheckCircle, 
+  XCircle, 
+  HelpCircle, 
+  AlertCircle,
+  Building,
+  Home,
+  User,
+  Users,
+  Calendar,
+  DollarSign,
+  Globe
+} from 'lucide-react';
 
 interface SingleChoiceWithUrlProps {
   options: string[];
@@ -57,6 +70,19 @@ export const SingleChoiceWithUrl: React.FC<SingleChoiceWithUrlProps> = ({ option
     };
   };
 
+  // Function to determine which icon to use based on the option text
+  const getIconForOption = (text: string) => {
+    const lowerText = text.toLowerCase();
+    
+    if (lowerText === 'yes') return <CheckCircle className="mr-2 text-[#22c55e]" size={20} />;
+    if (lowerText === 'no') return <XCircle className="mr-2 text-[#ef4444]" size={20} />;
+    if (lowerText.includes('not sure') || lowerText.includes('maybe')) return <HelpCircle className="mr-2 text-[#eab308]" size={20} />;
+    if (lowerText.includes('website')) return <Globe className="mr-2 text-[#1a73e8]" size={20} />;
+    
+    // Default icon for items that don't match any pattern
+    return <CheckCircle className="mr-2 text-[#1a73e8]" size={20} />;
+  };
+
   return (
     <div className="space-y-3">
       <RadioGroup
@@ -66,6 +92,8 @@ export const SingleChoiceWithUrl: React.FC<SingleChoiceWithUrlProps> = ({ option
       >
         {options.map((option, index) => {
           const { emoji, text } = extractEmoji(option);
+          const icon = emoji ? null : getIconForOption(text);
+          
           return (
             <div key={index}>
               <div 
@@ -77,7 +105,7 @@ export const SingleChoiceWithUrl: React.FC<SingleChoiceWithUrlProps> = ({ option
               >
                 <RadioGroupItem value={option} id={`option-${index}`} className="mr-3" />
                 <Label htmlFor={`option-${index}`} className="flex items-center text-base text-[#1a4b8a] cursor-pointer w-full">
-                  {emoji && <span className="text-xl mr-2">{emoji}</span>}
+                  {emoji ? <span className="text-xl mr-2">{emoji}</span> : icon}
                   {text}
                 </Label>
               </div>

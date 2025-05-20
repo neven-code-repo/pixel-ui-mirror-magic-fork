@@ -2,7 +2,24 @@
 import React from 'react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
-import { Facebook, Instagram, Linkedin, LightbulbIcon, Youtube } from 'lucide-react';
+import { 
+  Facebook, 
+  Instagram, 
+  Linkedin, 
+  LightbulbIcon, 
+  Youtube, 
+  CheckCircle,
+  XCircle,
+  Droplet,
+  Wallet,
+  Users,
+  ThumbsUp,
+  MessageCircle,
+  Phone,
+  Mail,
+  Clock,
+  Calendar
+} from 'lucide-react';
 import { TiktokIcon } from '@/components/icons/TiktokIcon';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
@@ -92,6 +109,26 @@ export const MultipleChoice: React.FC<MultipleChoiceProps> = ({ options, value, 
     return null;
   };
 
+  // Function to get an appropriate icon for non-social media options
+  const getIconForOption = (text: string) => {
+    const lowerText = text.toLowerCase();
+
+    // Pool service specific
+    if (lowerText.includes('pool')) return <Droplet className="mr-3 text-[#1a73e8]" size={24} />;
+    if (lowerText.includes('cost') || lowerText.includes('price') || lowerText.includes('budget')) return <Wallet className="mr-3 text-[#1a73e8]" size={24} />;
+    if (lowerText.includes('client') || lowerText.includes('customer')) return <Users className="mr-3 text-[#1a73e8]" size={24} />;
+    if (lowerText.includes('review') || lowerText.includes('rating')) return <ThumbsUp className="mr-3 text-[#1a73e8]" size={24} />;
+    if (lowerText.includes('message') || lowerText.includes('chat')) return <MessageCircle className="mr-3 text-[#1a73e8]" size={24} />;
+    if (lowerText.includes('call') || lowerText.includes('phone')) return <Phone className="mr-3 text-[#1a73e8]" size={24} />;
+    if (lowerText.includes('email') || lowerText.includes('mail')) return <Mail className="mr-3 text-[#1a73e8]" size={24} />;
+    if (lowerText.includes('time') || lowerText.includes('hour')) return <Clock className="mr-3 text-[#1a73e8]" size={24} />;
+    if (lowerText.includes('date') || lowerText.includes('schedule')) return <Calendar className="mr-3 text-[#1a73e8]" size={24} />;
+    if (lowerText === 'none') return <XCircle className="mr-3 text-[#ef4444]" size={24} />;
+    
+    // Default icon
+    return <CheckCircle className="mr-3 text-[#22c55e]" size={24} />;
+  };
+
   // Check if this is the social media question (q6)
   const isSocialMediaQuestion = options.some(opt => 
     ['facebook', 'instagram', 'linkedin', 'tiktok', 'twitter', 'pinterest', 'youtube', 'none'].map(s => s.toLowerCase())
@@ -109,6 +146,7 @@ export const MultipleChoice: React.FC<MultipleChoiceProps> = ({ options, value, 
       {options.map((option, index) => {
         const { emoji, text } = extractEmoji(option);
         const socialIcon = isSocialMediaQuestion ? getSocialIcon(option) : null;
+        const generalIcon = !emoji && !socialIcon ? getIconForOption(text) : null;
         
         return (
           <div 
@@ -126,7 +164,7 @@ export const MultipleChoice: React.FC<MultipleChoiceProps> = ({ options, value, 
               className="mr-3"
             />
             <Label htmlFor={`option-${index}`} className="flex items-center text-base text-[#1a4b8a] cursor-pointer w-full">
-              {socialIcon ? socialIcon : emoji && <span className="text-xl mr-2">{emoji}</span>}
+              {socialIcon || (emoji && <span className="text-xl mr-2">{emoji}</span>) || generalIcon}
               {text}
             </Label>
           </div>

@@ -8,6 +8,14 @@ interface EmailInputProps {
 }
 
 export const EmailInput: React.FC<EmailInputProps> = ({ value, onChange }) => {
+
+  const handleChange = (newValue: string) => {
+    onChange(newValue);
+    if (newValue && typeof fbq === 'function') {
+      fbq('track', 'AddToCart');
+    }
+  };
+  
   return (
     <div className="space-y-4">
       <Input

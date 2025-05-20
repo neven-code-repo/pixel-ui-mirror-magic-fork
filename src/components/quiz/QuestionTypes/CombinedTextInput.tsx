@@ -9,7 +9,6 @@ interface CombinedTextInputProps {
 
 export const CombinedTextInput: React.FC<CombinedTextInputProps> = ({ value, onChange }) => {
   // Split the value into business name and location parts
-  // Finding the business name and location differently to fix the comma issue
   const parts = value.split(',');
   
   // The business name is the first part
@@ -24,9 +23,11 @@ export const CombinedTextInput: React.FC<CombinedTextInputProps> = ({ value, onC
   };
 
   const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Allow commas in location field
+    // Fix: correctly handle spaces and allow commas in location field
     const newLocation = e.target.value;
-    onChange(`${businessName}${newLocation ? ',' : ''}${newLocation}`);
+    // Only add comma if there's content in the business name
+    const separator = businessName ? ',' : '';
+    onChange(`${businessName}${separator}${newLocation}`);
   };
 
   return (

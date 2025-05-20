@@ -8,23 +8,23 @@ interface CombinedTextInputProps {
 }
 
 export const CombinedTextInput: React.FC<CombinedTextInputProps> = ({ value, onChange }) => {
-  // Find the last comma in the string to separate business name and location
-  const lastCommaIndex = value.lastIndexOf(',');
+  // Split the value into business name and location parts
+  // Finding the business name and location differently to fix the comma issue
+  const parts = value.split(',');
   
-  // If there's a comma, split at the last comma. Otherwise, assume it's all business name
-  const businessName = lastCommaIndex !== -1 ? value.substring(0, lastCommaIndex) : value;
-  const location = lastCommaIndex !== -1 ? value.substring(lastCommaIndex + 1).trim() : '';
+  // The business name is the first part
+  const businessName = parts[0] || '';
+  
+  // The location is everything after the first comma
+  const location = parts.length > 1 ? parts.slice(1).join(',').trim() : '';
 
   const handleBusinessNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newBusinessName = e.target.value;
-    if (location) {
-      onChange(`${newBusinessName},${location}`);
-    } else {
-      onChange(newBusinessName);
-    }
+    onChange(`${newBusinessName}${location ? ',' : ''}${location}`);
   };
 
   const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Allow commas in location field
     const newLocation = e.target.value;
     onChange(`${businessName}${newLocation ? ',' : ''}${newLocation}`);
   };

@@ -1,0 +1,60 @@
+name: Auto-sync Fork
+
+# Controls when the workflow will run
+on:
+  # Schedule the workflow to run daily
+  # You can adjust the cron schedule as needed.
+  # This example runs at 00:00 UTC every day.
+  # See https://crontab.guru/ for help with cron schedules.
+  schedule:
+    - cron: '*/5 * * * *'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  sync:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks out your fork's repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          # Fetch all history so we can add the upstream remote and merge
+          fetch-depth: 0
+          # The branch you want to sync to (usually your default branch like main or master)
+          ref: main # <-- **Adjust this if your main branch is named differently (e.g., master)**
+          # Use the built-in GITHUB_TOKEN to push back to your repository
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Configure Git with a user name and email
+      - name: Configure Git
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+      # Add the original repository as an upstream remote
+      # **IMPORTANT:** Replace 'owner/repo' with the actual owner and repository name of the original repository
+      - name: Add upstream remote
+        run: git remote add upstream https://github.com/Thitny/pixel-ui-mirror-magic # 
+
+      # Fetch the latest changes from the upstream remote
+      - name: Fetch upstream changes
+        run: git fetch upstream
+
+      # Merge the upstream branch into your current branch
+      # **IMPORTANT:** Ensure 'main' here matches the branch you are syncing from upstream
+      - name: Merge upstream into current branch
+        run: git merge upstream/main # <-- **Adjust 'main' if the upstream branch is different**
+        # Add --no-ff if you prefer non-fast-forward merges
+        # Add --squash if you prefer a single commit with squashed changes
+        # If there are merge conflicts, this step will fail, and the workflow will stop.
+
+      # Push the changes back to your fork on GitHub
+      # **IMPORTANT:** Ensure 'main' here matches the branch you checked out in the 'Checkout code' step
+      - name: Push changes
+        run: git push origin main # <-- **Adjust 'main' if your main branch is different**
+        # This command will do nothing if there were no changes after the merge.

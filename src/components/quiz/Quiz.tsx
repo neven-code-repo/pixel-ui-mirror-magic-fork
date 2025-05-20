@@ -37,6 +37,11 @@ export const Quiz: React.FC<QuizProps> = ({ data }) => {
   const currentQuestion = data.questions[currentStep];
 
   const handleContinue = () => {
+    // Fire "InitiateCheckout" event when starting the quiz after entering business info
+    if (currentStep === 0 && typeof fbq === 'function') {
+      fbq('track', 'InitiateCheckout');
+    }
+    
     if (currentStep < data.questions.length - 1) {
       setCurrentStep(currentStep + 1);
     } else if (answers['q28']) {

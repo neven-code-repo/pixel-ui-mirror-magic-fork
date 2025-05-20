@@ -8,9 +8,11 @@ interface EmailInputProps {
 }
 
 export const EmailInput: React.FC<EmailInputProps> = ({ value, onChange }) => {
-
-  const handleChange = (newValue: string) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
     onChange(newValue);
+    
+    // Only fire AddToCart event when email is entered (not removed)
     if (newValue && typeof fbq === 'function') {
       fbq('track', 'AddToCart');
     }
@@ -21,7 +23,7 @@ export const EmailInput: React.FC<EmailInputProps> = ({ value, onChange }) => {
       <Input
         type="email"
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={handleChange}
         placeholder="yourbusiness@gmail.com"
         className="text-[#1e2b86]"
       />

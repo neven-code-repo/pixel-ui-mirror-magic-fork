@@ -24,7 +24,7 @@ export const CombinedTextInput: React.FC<CombinedTextInputProps> = ({ value, onC
   };
 
   const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newLocation = e.target.value.trim();
+    const newLocation = e.target.value;
     // Only add comma if there's content in both fields
     const separator = businessName && newLocation ? ',' : '';
     onChange(`${businessName}${separator}${newLocation ? ' ' + newLocation : ''}`);
@@ -34,7 +34,7 @@ export const CombinedTextInput: React.FC<CombinedTextInputProps> = ({ value, onC
     <div className="space-y-4">
       <BusinessInput
         label="Business Name"
-        placeholder="Happy Pets Grooming"
+        placeholder="Happy Pool Service"
         name="businessName"
         value={businessName}
         onChange={handleBusinessNameChange}

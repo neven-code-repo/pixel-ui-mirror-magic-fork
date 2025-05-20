@@ -14,9 +14,9 @@ import {
   Calendar,
   DollarSign,
   Clock,
-  Pool,
+  Droplet,
   Wrench,
-  Water
+  Hammer
 } from 'lucide-react';
 
 interface SingleChoiceProps {
@@ -75,10 +75,10 @@ export const SingleChoice: React.FC<SingleChoiceProps> = ({ options, value, onCh
     
     // Special case for pool business types
     if (lowerText.includes('building pools')) return <Building className="mr-2 text-[#1a73e8]" size={20} />;
-    if (lowerText.includes('pool cleaning')) return <Water className="mr-2 text-[#22c55e]" size={20} />;
+    if (lowerText.includes('pool cleaning')) return <Droplet className="mr-2 text-[#22c55e]" size={20} />;
     if (lowerText.includes('pool repair')) return <Wrench className="mr-2 text-[#ef4444]" size={20} />;
-    if (lowerText.includes('pool maintenance')) return <Pool className="mr-2 text-[#9333ea]" size={20} />;
-    if (lowerText.includes('water quality')) return <Water className="mr-2 text-[#0ea5e9]" size={20} />;
+    if (lowerText.includes('pool maintenance')) return <Hammer className="mr-2 text-[#9333ea]" size={20} />;
+    if (lowerText.includes('water quality')) return <Droplet className="mr-2 text-[#0ea5e9]" size={20} />;
     
     // Default icon mapping
     if (lowerText.includes('yes')) return <CheckCircle className="mr-2 text-[#22c55e]" size={20} />;

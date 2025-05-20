@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
@@ -23,10 +22,9 @@ import {
   Repeat,
   MessagesSquare,
   HelpCircle,
-  Pool,
+  Hammer,
   Building,
-  Wrench,
-  Water
+  Wrench
 } from 'lucide-react';
 import { TiktokIcon } from '@/components/icons/TiktokIcon';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
@@ -124,10 +122,10 @@ export const MultipleChoice: React.FC<MultipleChoiceProps> = ({ options, value, 
     // Special handling for question about pool business types (q2)
     if (questionId === 'q2') {
       if (lowerText.includes('building pools')) return <Building className="mr-3 text-[#1a73e8]" size={24} />;
-      if (lowerText.includes('pool cleaning')) return <Water className="mr-3 text-[#22c55e]" size={24} />;
+      if (lowerText.includes('pool cleaning')) return <Droplet className="mr-3 text-[#22c55e]" size={24} />;
       if (lowerText.includes('pool repair')) return <Wrench className="mr-3 text-[#ef4444]" size={24} />;
-      if (lowerText.includes('pool maintenance')) return <Pool className="mr-3 text-[#9333ea]" size={24} />;
-      if (lowerText.includes('water quality')) return <Water className="mr-3 text-[#0ea5e9]" size={24} />;
+      if (lowerText.includes('pool maintenance')) return <Hammer className="mr-3 text-[#9333ea]" size={24} />;
+      if (lowerText.includes('water quality')) return <Droplet className="mr-3 text-[#0ea5e9]" size={24} />;
     }
 
     // Special handling for question q8 about social media obstacles
@@ -144,7 +142,7 @@ export const MultipleChoice: React.FC<MultipleChoiceProps> = ({ options, value, 
     }
 
     // Pool service specific
-    if (lowerText.includes('pool')) return <Pool className="mr-3 text-[#1a73e8]" size={24} />;
+    if (lowerText.includes('pool')) return <Droplet className="mr-3 text-[#1a73e8]" size={24} />;
     if (lowerText.includes('cost') || lowerText.includes('price') || lowerText.includes('budget')) return <Wallet className="mr-3 text-[#1a73e8]" size={24} />;
     if (lowerText.includes('client') || lowerText.includes('customer')) return <Users className="mr-3 text-[#1a73e8]" size={24} />;
     if (lowerText.includes('review') || lowerText.includes('rating')) return <ThumbsUp className="mr-3 text-[#1a73e8]" size={24} />;

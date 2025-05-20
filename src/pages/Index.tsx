@@ -4,7 +4,6 @@ import { Quiz } from "@/components/quiz/Quiz";
 import { QuizProvider } from "@/context/QuizContext";
 import quizData from "@/data/quiz-data.json";
 import { QuizData } from "@/types/quiz";
-import { QuizDataDownload } from "@/components/quiz/QuizDataDownload";
 
 const Index: React.FC = () => {
   // Cast quizData to QuizData type to ensure compatibility
@@ -12,9 +11,6 @@ const Index: React.FC = () => {
   
   return (
     <div className="min-h-screen bg-[rgba(244,247,255,1)] flex flex-col items-center justify-center">
-      <div className="absolute top-4 right-4">
-        <QuizDataDownload />
-      </div>
       <QuizProvider>
         <Quiz data={typedQuizData} />
       </QuizProvider>

@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { QuizData } from '@/types/quiz';
 import { QuizQuestion } from './QuizQuestion';
 import { useQuiz } from '@/context/QuizContext';
@@ -11,6 +11,14 @@ import { BusinessCarousel } from './BusinessCarousel';
 import { EmailInput } from './QuestionTypes/EmailInput';
 import { AnalysisScreen } from './AnalysisScreen';
 
+const quizTitles = [
+  "Florida Pool Pro Quiz: Unlock Your Business Growth!",
+  "Slash Costs, Boost Leads: Florida Pool Biz Quiz.",
+  "Attract Better Leads: Take the Florida Pool Pro Quiz!",
+  "More Clients, Less Stress: Florida Pool Biz Growth Quiz.",
+  "Scale Your Florida Pool Biz: 2-Min Growth Quiz!"
+];
+
 interface QuizProps {
   data: QuizData;
 }
@@ -19,6 +27,12 @@ export const Quiz: React.FC<QuizProps> = ({ data }) => {
   const { currentStep, setCurrentStep, answers, isValidAnswer, setAnswer } = useQuiz();
   const [showAnalysis, setShowAnalysis] = useState(false);
   const [showCompletion, setShowCompletion] = useState(false);
+  const [randomTitle, setRandomTitle] = useState("");
+  
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * quizTitles.length);
+    setRandomTitle(quizTitles[randomIndex]);
+  }, []);
   
   const currentQuestion = data.questions[currentStep];
 
@@ -116,6 +130,11 @@ export const Quiz: React.FC<QuizProps> = ({ data }) => {
       
       <main className="bg-[rgba(244,247,255,1)] flex flex-col flex-grow px-6 py-8 justify-between">
         <div>
+          {currentStep === 0 && (
+            <h1 className="text-[1.3em] font-bold text-[#1a4b8a] text-center mb-4">
+              {randomTitle}
+            </h1>
+          )}
           <BusinessProgress progress={progress} />
           
           <div className="w-full mt-8">

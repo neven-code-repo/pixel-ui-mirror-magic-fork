@@ -29,7 +29,7 @@ export const CombinedTextInput: React.FC<CombinedTextInputProps> = ({ value, onC
       />
       <BusinessInput
         label="Location"
-        placeholder="Denver"
+        placeholder="Miami, Florida"
         name="location"
         value={location || ''}
         onChange={handleLocationChange}

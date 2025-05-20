@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { BusinessHeader } from "./BusinessHeader";
 import { BusinessProgress } from "./BusinessProgress";
@@ -37,7 +38,7 @@ export const BusinessForm: React.FC = () => {
 
         <div className="w-full flex-1 mt-12">
           <h1 className="w-full max-w-[520px] text-2xl text-[rgba(30,43,134,1)] font-bold text-center leading-[34px]">
-            Please enter your business name and the city where it's located.
+            Please enter your business name, city and state where it's located.
           </h1>
 
           <form className="w-full text-[#1e2b86] mt-12">
@@ -52,7 +53,7 @@ export const BusinessForm: React.FC = () => {
             <div className="mt-4">
               <BusinessInput
                 label="Location"
-                placeholder="City, Country"
+                placeholder="City, State"
                 name="location"
                 value={formData.location}
                 onChange={handleInputChange}

@@ -15,19 +15,21 @@ export const CombinedTextInput: React.FC<CombinedTextInputProps> = ({ value, onC
   const businessName = firstCommaIndex >= 0 ? value.substring(0, firstCommaIndex) : value;
   
   // The location is everything after the first comma (if exists)
-  const location = firstCommaIndex >= 0 ? value.substring(firstCommaIndex + 1).trim() : '';
+  // Don't trim the location to preserve spaces and special characters
+  const location = firstCommaIndex >= 0 ? value.substring(firstCommaIndex + 1) : '';
 
   const handleBusinessNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newBusinessName = e.target.value;
+    // Don't add space after comma to prevent automatic trimming
     const separator = newBusinessName && location ? ',' : '';
-    onChange(`${newBusinessName}${separator}${location ? ' ' + location : ''}`);
+    onChange(`${newBusinessName}${separator}${location ? location : ''}`);
   };
 
   const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newLocation = e.target.value;
-    // Only add comma if there's content in both fields
+    // Don't add space after comma to prevent automatic trimming
     const separator = businessName && newLocation ? ',' : '';
-    onChange(`${businessName}${separator}${newLocation ? ' ' + newLocation : ''}`);
+    onChange(`${businessName}${separator}${newLocation}`);
   };
 
   return (

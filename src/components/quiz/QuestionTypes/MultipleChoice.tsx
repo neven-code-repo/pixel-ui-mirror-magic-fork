@@ -18,7 +18,11 @@ import {
   Phone,
   Mail,
   Clock,
-  Calendar
+  Calendar,
+  Pencil,
+  Repeat,
+  MessagesSquare,
+  HelpCircle
 } from 'lucide-react';
 import { TiktokIcon } from '@/components/icons/TiktokIcon';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
@@ -112,6 +116,19 @@ export const MultipleChoice: React.FC<MultipleChoiceProps> = ({ options, value, 
   // Function to get an appropriate icon for non-social media options
   const getIconForOption = (text: string) => {
     const lowerText = text.toLowerCase();
+
+    // Special handling for question q8 about social media obstacles
+    if (questionId === 'q8') {
+      if (lowerText.includes('creating engaging content') || lowerText.includes('creating')) {
+        return <Pencil className="mr-3 text-[#1a73e8]" size={24} />;
+      } else if (lowerText.includes('staying consistent') || lowerText.includes('consistent')) {
+        return <Repeat className="mr-3 text-[#22c55e]" size={24} />;
+      } else if (lowerText.includes('interacting with followers') || lowerText.includes('comments')) {
+        return <MessagesSquare className="mr-3 text-[#9333ea]" size={24} />;
+      } else if (lowerText.includes('not sure') || lowerText.includes('where to start')) {
+        return <HelpCircle className="mr-3 text-[#8E9196]" size={24} />;
+      }
+    }
 
     // Pool service specific
     if (lowerText.includes('pool')) return <Droplet className="mr-3 text-[#1a73e8]" size={24} />;

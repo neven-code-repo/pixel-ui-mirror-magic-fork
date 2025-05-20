@@ -8,20 +8,15 @@
     },
     {
       "id": "q2",
-      "question_text": "Which of the following best describes your business type or category?",
-      "type": "single_choice",
+      "question_text": "What type of pool business are you running?",
+      "type": "multiple_choice",
       "options": [
-        "Restaurant/Café / Food Business",
-        "Retail Store / Boutique",
-        "Professional Services (Consultant, Lawyer, Accountant, etc.)",
-        "Brick-and-Mortar Shop (Local customers)",
-        "eCommerce (Selling products online)",
-        "Health/Wellness / Fitness",
-        "Home Services (Cleaning, Contracting, Maintenance, etc.)",
-        "Creative/Freelance (Photography, Design, Art)",
-        "Events / Entertainment",
-        "Startup or Tech-based",
-        "Other (please specify)"
+        "🏊 Building pools",
+        "💧 Pool cleaning",
+        "🔧 Pool repair",
+        "🛠️ Pool maintenance",
+        "🌊 Water quality management",
+        "📝 Other"
       ],
       "variable": "#category"
     },

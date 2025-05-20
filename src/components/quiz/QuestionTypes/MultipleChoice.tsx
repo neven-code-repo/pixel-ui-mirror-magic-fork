@@ -22,7 +22,11 @@ import {
   Pencil,
   Repeat,
   MessagesSquare,
-  HelpCircle
+  HelpCircle,
+  Pool,
+  Building,
+  Wrench,
+  Water
 } from 'lucide-react';
 import { TiktokIcon } from '@/components/icons/TiktokIcon';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
@@ -46,7 +50,7 @@ export const MultipleChoice: React.FC<MultipleChoiceProps> = ({ options, value, 
 
   // Function to extract emoji from the start of an option if present
   const extractEmoji = (option: string) => {
-    const emojiRegex = /^([\u{1F300}-\u{1F6FF}\u{2600}-\u{26FF}\u{1F1E0}-\u{1F1FF}✅❓❗🔴🟠🟡🟢🔵🟣🟤⚫⚪🟥🟧🟨🟩🟦🟪🟫⬛⬜💹💲💰💸]+ )/u;
+    const emojiRegex = /^([\u{1F300}-\u{1F6FF}\u{2600}-\u{26FF}\u{1F1E0}-\u{1F1FF}✅❓❗🔴🟠🟡🟢🔵🟣🟤⚫⚪🟥🟧🟨🟩🟦🟪🟫⬛⬜💹💲💰💸🏊💧🔧🛠️🌊📝]+ )/u;
     const match = option.match(emojiRegex);
     
     if (match) {
@@ -117,6 +121,15 @@ export const MultipleChoice: React.FC<MultipleChoiceProps> = ({ options, value, 
   const getIconForOption = (text: string) => {
     const lowerText = text.toLowerCase();
 
+    // Special handling for question about pool business types (q2)
+    if (questionId === 'q2') {
+      if (lowerText.includes('building pools')) return <Building className="mr-3 text-[#1a73e8]" size={24} />;
+      if (lowerText.includes('pool cleaning')) return <Water className="mr-3 text-[#22c55e]" size={24} />;
+      if (lowerText.includes('pool repair')) return <Wrench className="mr-3 text-[#ef4444]" size={24} />;
+      if (lowerText.includes('pool maintenance')) return <Pool className="mr-3 text-[#9333ea]" size={24} />;
+      if (lowerText.includes('water quality')) return <Water className="mr-3 text-[#0ea5e9]" size={24} />;
+    }
+
     // Special handling for question q8 about social media obstacles
     if (questionId === 'q8') {
       if (lowerText.includes('creating engaging content') || lowerText.includes('creating')) {
@@ -131,7 +144,7 @@ export const MultipleChoice: React.FC<MultipleChoiceProps> = ({ options, value, 
     }
 
     // Pool service specific
-    if (lowerText.includes('pool')) return <Droplet className="mr-3 text-[#1a73e8]" size={24} />;
+    if (lowerText.includes('pool')) return <Pool className="mr-3 text-[#1a73e8]" size={24} />;
     if (lowerText.includes('cost') || lowerText.includes('price') || lowerText.includes('budget')) return <Wallet className="mr-3 text-[#1a73e8]" size={24} />;
     if (lowerText.includes('client') || lowerText.includes('customer')) return <Users className="mr-3 text-[#1a73e8]" size={24} />;
     if (lowerText.includes('review') || lowerText.includes('rating')) return <ThumbsUp className="mr-3 text-[#1a73e8]" size={24} />;
@@ -157,6 +170,9 @@ export const MultipleChoice: React.FC<MultipleChoiceProps> = ({ options, value, 
 
   // Check if this is the data collection question (q25)
   const isDataCollectionQuestion = questionId === 'q25';
+
+  // Check if this is the pool business type question (q2)
+  const isPoolBusinessTypeQuestion = questionId === 'q2';
 
   return (
     <div className="space-y-3">
@@ -191,6 +207,12 @@ export const MultipleChoice: React.FC<MultipleChoiceProps> = ({ options, value, 
       {isObstacleQuestion && (
         <div className="mt-4 bg-[#e3f0ff] border border-[#a8d1ff] p-3 rounded-md text-sm text-[#1a4b8a]">
           <p className="font-medium">Interesting fact: 90% of pool service businesses in Florida face similar challenges</p>
+        </div>
+      )}
+
+      {isPoolBusinessTypeQuestion && (
+        <div className="mt-4 bg-[#e3f0ff] border border-[#a8d1ff] p-3 rounded-md text-sm text-[#1a4b8a]">
+          <p className="font-medium">Florida pool businesses that offer multiple services typically see 35% higher annual revenue</p>
         </div>
       )}
 

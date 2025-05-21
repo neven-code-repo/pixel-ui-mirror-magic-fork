@@ -42,9 +42,13 @@ export const Quiz: React.FC<QuizProps> = ({ data }) => {
       fbq('track', 'InitiateCheckout');
     }
     
+    // Check if we're on the email input question (usually the last one)
+    const isEmailQuestion = currentQuestion?.type === 'email_input';
+    
     if (currentStep < data.questions.length - 1) {
       setCurrentStep(currentStep + 1);
-    } else if (answers['q28']) {
+    } else if (isEmailQuestion) {
+      // If we're on the email question and it's the last question, proceed to analysis
       setShowAnalysis(true);
     }
   };

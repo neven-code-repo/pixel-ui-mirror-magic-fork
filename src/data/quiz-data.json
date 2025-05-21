@@ -2,7 +2,7 @@
   "questions": [
     {
       "id": "q1",
-      "question_text": "Please enter your business name and the city where it's located.",
+      "question_text": "Please enter your business name, city and state where it's located.",
       "type": "combined_text",
       "variables": ["#business-name", "#city"]
     },
@@ -38,7 +38,7 @@
       "id": "q4",
       "question_text": "Are you listed in local directories (e.g., Google Business Profile, Yelp)?",
       "type": "single_choice",
-      "options": ["✅ Yes", "✅ No", "💷 Not sure"],
+      "options": ["✅ Yes", "❗ No", "💷 Not sure"],
       "variable": "#local-directories"
     },
     {
@@ -178,26 +178,13 @@
     },
     {
       "id": "q17",
-      "question_text": "If time or budget weren't an issue, which area would you prioritize first?",
-      "type": "multiple_choice",
-      "options": [
-        "Posting more regularly on social media",
-        "Improving communication and response time",
-        "Handling online reviews and reputation",
-        "Running ads for more leads",
-        "Other (please specify)"
-      ],
-      "variable": "#time-social-priority"
-    },
-    {
-      "id": "q18",
       "question_text": "Do you monitor online reviews on platforms like Google, Yelp, or Facebook?",
       "type": "single_choice",
       "options": ["Yes", "No", "Not sure"],
       "variable": "#reputation-monitor"
     },
     {
-      "id": "q19",
+      "id": "q18",
       "question_text": "How often do you respond to online reviews (positive or negative)?",
       "type": "single_choice",
       "options": [
@@ -209,78 +196,41 @@
       "variable": "#reputation-often"
     },
     {
-      "id": "q20",
-      "question_text": "How do you handle potential customers who contact you outside of regular business hours?",
-      "type": "single_choice",
-      "options": [
-        "We use automated replies or chatbots",
-        "We respond the next business day",
-        "We don't have a system",
-        "I'd like help setting up an after-hours approach"
-      ],
-      "variable": "#customers-oowh"
-    },
-    {
-      "id": "q21",
-      "question_text": "How do you typically handle negative reviews?",
-      "type": "single_choice",
-      "options": [
-        "Respond professionally in public",
-        "Contact the reviewer privately",
-        "Ignore them",
-        "I haven't had negative reviews yet",
-        "Not sure"
-      ],
-      "variable": "#reputation-negative"
-    },
-    {
-      "id": "q22",
+      "id": "q19",
       "question_text": "Do you ask customers to leave reviews or share their impressions of your business?",
       "type": "single_choice",
       "options": ["Yes, regularly", "Occasionally", "No, never", "Not sure how to start"],
       "variable": "#reputation-initiative"
     },
     {
-      "id": "q23",
+      "id": "q20",
       "question_text": "Do you use any word-of-mouth (WOM) incentives?",
       "type": "single_choice",
       "options": ["Yes", "No", "Thinking about it", "Not sure how to implement"],
       "variable": "#reputation-wom"
     },
     {
-      "id": "q24",
+      "id": "q21",
       "question_text": "Are you satisfied with the number of leads or inquiries you receive from your online channels?",
       "type": "single_choice",
       "options": ["Very satisfied", "Somewhat satisfied", "Not satisfied", "Unsure / I don't track this"],
       "variable": "#leads-quality"
     },
     {
-      "id": "q25",
+      "id": "q22",
       "question_text": "Do you collect any customer data (e.g., emails, phone numbers) for follow-up marketing?",
       "type": "single_choice",
       "options": ["Yes, I maintain a list", "Sometimes, but not organized", "No, I don't collect any data", "Not sure how to start"],
       "variable": "#emails-collect"
     },
     {
-      "id": "q26",
-      "question_text": "Does your business adapt its online strategy during peak seasons or holidays?",
-      "type": "single_choice",
-      "options": [
-        "Yes, we plan special promotions",
-        "Sometimes, but not consistently",
-        "No, we treat all seasons the same",
-        "Not sure how to create seasonal campaigns"
-      ],
-      "variable": "#special-events"
-    },
-    {
-      "id": "q27",
+      "id": "q23",
       "question_text": "Any other comments or specific areas you'd like to improve?",
       "type": "open_text",
       "variable": "#other-comments"
     },
     {
-      "id": "q28",
+      "id": "q24",
       "question_text": "Where should we send your personalized report? Please enter your best email",
       "type": "email_input",
       "variable": "#contact-info"
